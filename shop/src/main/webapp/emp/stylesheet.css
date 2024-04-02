@@ -1,0 +1,77 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Ownglyph_Dailyokja-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/Ownglyph_Dailyokja-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+	}
+	*{
+		font-family:'Ownglyph_Dailyokja-Rg';
+	}
+	body{
+		background-color:#f8faca;
+	}
+	.container{
+		display: flex;
+  		justify-content: center;
+  		flex-direction:row;
+  		align-items: center;
+	}
+	.inner{
+	position: absolute;
+ 	top: 50%;
+ 	left: 50%;
+  	transform: translate(-50%,-50%); 
+  	background-color:#e8ddcb;
+  	width:80%;
+  	height:80%;
+  	border-radius:10px;
+  	border: 2px dashed black;
+	text-align:center;
+	}
+	.btnn{
+	background-color:#a49bc6;
+	color:white;
+	border-radius:5px;
+
+	}
+	table{
+		margin:auto;
+		padding:auto;
+		width:80%;
+		height:70%;
+	}
+	th{
+	background-color:#e8ddcb;
+	}
+	td{
+	background-color:#e8ddcb;
+	}
+	a{
+	text-decoration:none;
+	color:black;
+	}
+	a:hover{
+	 color:#a58680;
+	}
+	
+	#pageTop ul li {                       
+         list-style: none;           
+         color: white;               
+         background-color: #e8ddcb;           
+         line-height: 30px;         
+         float:left;
+         text-align: center; 
+         margin-left:10px;    
+
+     }
+     #pageTop .pageLink {
+     	color:black;
+     	display:block;
+     	font-weight:bold;
+     }
+     
+    .disabled {
+        cursor: not-allowed;
+  		 color:#a58680;
+	}
