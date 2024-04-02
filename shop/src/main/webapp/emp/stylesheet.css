@@ -22,7 +22,7 @@
  	top: 50%;
  	left: 50%;
   	transform: translate(-50%,-50%); 
-  	background-color:#e8ddcb;
+  	background-color:#ffffff;
   	width:80%;
   	height:80%;
   	border-radius:10px;
@@ -35,12 +35,7 @@
 	border-radius:5px;
 
 	}
-	table{
-		margin:auto;
-		padding:auto;
-		width:80%;
-		height:70%;
-	}
+	
 	th{
 	background-color:#e8ddcb;
 	}
@@ -55,23 +50,4 @@
 	 color:#a58680;
 	}
 	
-	#pageTop ul li {                       
-         list-style: none;           
-         color: white;               
-         background-color: #e8ddcb;           
-         line-height: 30px;         
-         float:left;
-         text-align: center; 
-         margin-left:10px;    
-
-     }
-     #pageTop .pageLink {
-     	color:black;
-     	display:block;
-     	font-weight:bold;
-     }
-     
-    .disabled {
-        cursor: not-allowed;
-  		 color:#a58680;
-	}
+	

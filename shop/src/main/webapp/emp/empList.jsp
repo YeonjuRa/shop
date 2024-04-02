@@ -117,7 +117,7 @@
 	<h2 style="text-decoration:underline; margin:10px;">STOREMADE</h2>
 	<h2>사원목록</h2>
 	
-	<table>
+	<table class="table table-hover">
 		<tr>
 			<th>ACTIVE</th>
 			<th>EMP ID</th>
@@ -149,35 +149,37 @@
 				<div class="text-center mt-2"><%=currentPage%></div>
 				<br>
 				<!-- 페이징 버튼 -->
-				<div  style="align-items:center; margin-left:35%;height:40px; width:400px">
-				<nav id="pageTop">
-				<ul style="background-color:#e8ddcb">
 				
-				<!-- 1페이지일경우 처음, 이전 버튼 비활성화 , 마지막 페이지일 경우 마지막으로,다음 버튼 비활성화 -->
+				<!-- 페이징 버튼 -->
+				<nav>
+				<ul class="pagination justify-content-center">
+				
+				
 				<%
 					if(currentPage > 1){
-				
+				//1페이지보다 작을때 이전페이지로 이동을 못함
+				//페이지번호가 1보다 클 때만 이전페이지 버튼 출력 + 다음페이지 버튼은 고정;
 				%>
-					<li class="pageLink"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
-					<li class="pageLink"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
+					<li class="page-item"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
+					<li class="page-item"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
 				<%
 					}else{
 				%>	
-					<li class="pageLink disabled"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
-					<li class="pageLink disabled"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
+					<li class="page-item disabled"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
+					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
 					
 				<%	
 					}
 					if(currentPage<lastPage){
 				%>
-					<li class="pageLink"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
-					<li class="pageLink"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
+					<li class="page-item"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
+					<li class="page-item"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
 				<%
 					}else{
 						
 				%>
-					<li class="pageLink disabled"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
-					<li class="pageLink disabled"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
+					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
+					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
 				
 				<% 
 					}
@@ -186,7 +188,7 @@
 				
 				</ul>
 				</nav>
-				</div>
+				
 	</div>
 </div>
 </body>
