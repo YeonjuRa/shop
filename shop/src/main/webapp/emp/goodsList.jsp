@@ -24,7 +24,7 @@
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		int rowPerPage = 10;
+		int rowPerPage = 15;
 		int startRow = (currentPage-1) * rowPerPage;
 		
 		//lastPage 구하기
@@ -53,6 +53,7 @@
 	*/
 	
 	String category = request.getParameter("category");
+	//category가 null일경우 제
 	if(category == null){
 		category = "";
 	}
@@ -81,6 +82,7 @@
 	ResultSet rs2 = null;
 	String sql2 = null;
 	PreparedStatement stmt2 = null;
+	//전체상품출력과 선택목록 출력 분
 	if(category == ""){
 		sql2 = "select * from goods limit ?,?";
 		stmt2 = con.prepareStatement(sql2);
@@ -139,13 +141,21 @@
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	</div>
 	
-	<div>
-		<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>
-	</div>
 	
-	<!-- 서브메뉴 : 카테고리별 상폼리스트-->
+	
+	
+	</div>
+	<!-- 리스트 출력 -->
+	<div style="justify-content:center;text-align:center;">
+	
+	<h3>OUR PRODUCTS</h3>
+	
+	<!-- 메뉴 사이드 출력  -->
 	<div>
-		<a href="/shop/emp/goodsList.jsp">전체</a>
+	<div style="float:left; width:200px; height:500px;  margin-left:30px; margin-top:5px; margin-right:20px;" class="sidemenu">
+		<div>
+		<a href="/shop/emp/goodsList.jsp" class="mt-2">전체</a>
+		<hr>
 		<%
 			for(HashMap m : categoryList){
 				
@@ -153,71 +163,137 @@
 			<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
 					<%=(String)(m.get("category"))%>
 					(<%=(Integer)(m.get("cnt"))%>)
-				</a>
-
+			</a>
+			<hr>	
 		<% 
 			}
 		
 		
 		%>
 	
+		</div>
+	
+		<div style="font-weight:bold;">
+			<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>
+		</div>
+		
 	</div>
-	</div>
-	<!-- 리스트 출력 -->
-	<div style="justify-content:center;text-align:center;">
-	<h3>OUR PRODUCTS</h3>
-	<div style="margin-left: 80px;">
+	
+	<div class="goods" style="width:80%; float:right; margin-left:10px;">
+	
+	
 		<%
+			//6번째 박스마다 줄바꿈위해clear both 속성 추가해주
+			int floatBoxCnt = 0;
 			for(HashMap gpc: goodsPerCategory){
 				if(category == ""){
-		%>			
-			<a href="#" style="float:left; margin:10px;">
+					if(floatBoxCnt%5 == 0){
+		%>	
+		
+			<a href="#" style="float:left; clear:both;">
 					<img src="./reference1.png" width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 			</a>
-		<%	
+			
+		<%			
+					}else{
+		%>			
+			<a href="#" style="float:left;">
+					<img src="./reference1.png" width="150" height="150">
+					<div><%=(String)(gpc.get("goodsTitle"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
+			</a>
+			
+		<% 		
+					}
 				}else if(category.equals("가방")){
+					if(floatBoxCnt%5 == 0){
 					
 		%>			
-				<a href="#" style="float:left;margin:10px;">
+				<a href="#" style="float:left; clear:both;">
 					<img src="./referencebag.png" width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 				</a>
 		
 		<%
+					}else{
+		%>
+				<a href="#" style="float:left;">
+					<img src="./referencebag.png" width="150" height="150">
+					<div><%=(String)(gpc.get("goodsTitle"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
+				</a>
+		
+		<%
+					}
 				}else if(category.equals("상의")){
+					if(floatBoxCnt%5 == 0){
 					
 		%>			
-				<a href="#" style="float:left;margin:10px;">
+				<a href="#" style="float:left; clear:both;">
 					<img src="./referenceshirts.png" width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 				</a>
 				
 			
 		<%
+					}else{
+		%>			
+				<a href="#" style="float:left;">
+					<img src="./referenceshirts.png" width="150" height="150">
+					<div><%=(String)(gpc.get("goodsTitle"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
+				</a>	
+		
+		<% 
+					}
 				}else if(category.equals("액세서리")){
+					if(floatBoxCnt%5 == 0){
 				
 		%>			
-				<a href="#" style="float:left;margin:10px;">
+				<a href="#" style="float:left;clear:both;">
 					<img src="./referenceac.png" width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 				
 				</a>
-	<% 		
+		<% 		
+					}else{
+		%>
+				<a href="#" style="float:left;">
+					<img src="./referenceac.png" width="150" height="150">
+					<div><%=(String)(gpc.get("goodsTitle"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
+				
+				</a>
+		
+		<% 
+					}
 				}else if(category.equals("원피스")){
+					if(floatBoxCnt%5 == 0){
 			
-	%>			
-				<a href="#" style="float:left;margin:10px;">
+		%>			
+				<a href="#" style="float:left;clear:both;">
 					<img src="./reference1.png"  width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 				
 				</a>
-	<% 		
+		<% 			}else{
+		%>
+				<a href="#" style="float:left;">
+					<img src="./reference1.png"  width="150" height="150">
+					<div><%=(String)(gpc.get("goodsTitle"))%></div>
+					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
+				
+				</a>
+				
+		<% 
+	
+						}
 			}		
 		
 		%>
@@ -225,51 +301,54 @@
 		
 		
 		<% 
+			floatBoxCnt += 1;
+			//System.out.println(floatBoxCnt);
 			}
 		
 		
 		%>
-	</div>
+		</div>
+		</div>
+		</div>
 	</div> 
-	</div>
+
 		<!-- 페이징 버튼 -->
-		<div style="clear:both">
-				<nav>
-				<ul class="pagination justify-content-center">
+		<div style="clear:both;height:40px;display: grid;place-items: center;" class="mt-5">
+				
+				<ul class="paging" style="text-align:center;">
 				
 				
 				<%
 					if(currentPage > 1){
-				//1페이지보다 작을때 이전페이지로 이동을 못함
-				//페이지번호가 1보다 클 때만 이전페이지 버튼 출력 + 다음페이지 버튼은 고정;
+			
 				%>
-					<li class="page-item"><a href="./goodsList.jsp?currentPage=1&category=<%=category%>" class="page-link">처음 페이지</a></li>
-					<li class="page-item"><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>" class="page-link">이전</a></li>
+					<li ><a href="./goodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지 </a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> < 이전 </a></li>
 				<%
 					}else{
 				%>	
-					<li class="page-item disabled"><a href="./goodsList.jsp?currentPage=1&category=<%=category%>" class="page-link">처음 페이지</a></li>
-					<li class="page-item disabled"><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>" class="page-link">이전</a></li>
+					<li ><a href="./goodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지 </a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> < 이전 </a></li>
 					
 				<%	
 					}
 					if(currentPage<lastPage){
 				%>
-					<li class="page-item"><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>" class="page-link">다음</a></li>
-					<li class="page-item"><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>" class="page-link">마지막 페이지</a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp; 다음 > </a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> 마지막 페이지 >></a></li>
 				<%
 					}else{
 						
 				%>
-					<li class="page-item disabled"><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>" class="page-link">다음</a></li>
-					<li class="page-item disabled"><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>" class="page-link">마지막 페이지</a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>"> 다음 ></a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> 마지막 페이지 >></a></li>
 				
 				<% 
 					}
 				
 				%>
 				</ul>
-				</nav>
+				
 			</div>
 			
 </body>

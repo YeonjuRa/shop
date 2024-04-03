@@ -39,4 +39,31 @@
 	a:hover{
 	 color:#a58680;
 	}
+	img{
+	border-bottom:1px dashed black;
 	
+	
+	
+	}
+	
+	.goods a{
+		border:1px solid;
+		margin:5px;
+		border-radius:3px;
+		background-color:#dec3e6;
+	}
+	ul{
+		list-style:none;
+		float:left;
+		display:inline;
+	
+	}
+	ul li{
+		float:left;
+	}
+	.sidemenu a{
+		font-size: 17px;
+		
+		
+		
+	}

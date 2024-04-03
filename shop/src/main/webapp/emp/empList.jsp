@@ -28,7 +28,7 @@
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
-	int rowPerPage = 10;
+	int rowPerPage = 8;
 	int startRow = (currentPage-1) * rowPerPage;
 	
 	//lastPage 구하기
@@ -164,47 +164,46 @@
 	</table>
 		<!-- 페이징 넘기기-->
 				<div class="text-center mt-2"><%=currentPage%></div>
-				<br>
 				
 				
 				<!-- 페이징 버튼 -->
-				<nav>
-				<ul class="pagination justify-content-center">
+		<div style="clear:both;height:40px;display: grid;place-items: center;" class="mt-3">
+				
+				<ul class="paging" style="text-align:center;">
 				
 				
 				<%
 					if(currentPage > 1){
-				//1페이지보다 작을때 이전페이지로 이동을 못함
-				//페이지번호가 1보다 클 때만 이전페이지 버튼 출력 + 다음페이지 버튼은 고정;
+			
 				%>
-					<li class="page-item"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
-					<li class="page-item"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
+					<li ><a href="./empList.jsp?currentPage=1"> << 처음 페이지 </a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>"> < 이전 </a></li>
 				<%
 					}else{
 				%>	
-					<li class="page-item disabled"><a href="./empList.jsp?currentPage=1" class="page-link">처음 페이지</a></li>
-					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=currentPage-1%>" class="page-link">이전</a></li>
+					<li ><a href="./empList.jsp?currentPage=1"> << 처음 페이지 </a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>"> < 이전 </a></li>
 					
 				<%	
 					}
 					if(currentPage<lastPage){
 				%>
-					<li class="page-item"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
-					<li class="page-item"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>">&nbsp; 다음 > </a></li>
+					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >></a></li>
 				<%
 					}else{
 						
 				%>
-					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=currentPage+1%>" class="page-link">다음</a></li>
-					<li class="page-item disabled"><a href="./empList.jsp?currentPage=<%=lastPage%>" class="page-link">마지막 페이지</a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>"> 다음 ></a></li>
+					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >></a></li>
 				
 				<% 
 					}
 				
 				%>
-				
 				</ul>
-				</nav>
+				
+			</div>
 				
 	
 	</div>

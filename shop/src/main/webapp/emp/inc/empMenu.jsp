@@ -13,5 +13,6 @@
 	<a href="/shop/emp/goodsList.jsp">상품관리</a>
 	<a href="">other</a>
 	<!-- 회원정보 수정 -->
-	<a></a>
+	<br>
+	<a href=""><%=(String)loginMember.get("empId")%></a>님 안녕하세요 :)
 </div>
