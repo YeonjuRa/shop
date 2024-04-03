@@ -11,8 +11,7 @@
 		return;
 	}
 	System.out.println(session.getAttribute("loginEmp"));
-	/* if((session.getAttribute("loginEmp") != ("admin"))){
-		System.out.println("해당 페이지에 접근할 수 있는 권한이 없습니다.");} */
+	
 %>
 
 <%
@@ -115,6 +114,9 @@
 	<div class="inner">
 	
 	<h2 style="text-decoration:underline; margin:10px;">STOREMADE</h2>
+	<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
+	<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
+	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	<h2>사원목록</h2>
 	
 	<table class="table table-hover">
@@ -131,7 +133,22 @@
 				for(HashMap<String,Object> m: list){
 			%>
 			<tr>
-				<td><a href="./modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>"><%=(String)(m.get("active"))%></a></td>
+			<%
+			HashMap<String,Object> n = (HashMap<String,Object>)(session.getAttribute("loginEmp"));
+			//grade 가 0 이상만 a태그 링크로 active값 변경 가능.
+				if( (Integer)(n.get("grade")) > 0){
+			%>
+			
+			<td><a href="./modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>"><%=(String)(m.get("active"))%></a></td>		
+			<% 
+				}else{
+			%>
+					<td><%=(String)(m.get("active"))%></td>
+			<% 	
+				}
+			
+			%>
+				
 				<td><%=(String)(m.get("empId"))%></td>
 				<td><%=(String)(m.get("empName"))%></td>
 				<td><%=(String)(m.get("empJob"))%></td>
@@ -148,7 +165,7 @@
 		<!-- 페이징 넘기기-->
 				<div class="text-center mt-2"><%=currentPage%></div>
 				<br>
-				<!-- 페이징 버튼 -->
+				
 				
 				<!-- 페이징 버튼 -->
 				<nav>
@@ -189,7 +206,11 @@
 				</ul>
 				</nav>
 				
+	
 	</div>
+	
 </div>
+<div style="text-align:center;margin-top:50px;"><a href="./empLogoutAction.jsp" style="width:50px;
+	height:30px;display: inline-block;">로그아웃</a></div>
 </body>
 </html>

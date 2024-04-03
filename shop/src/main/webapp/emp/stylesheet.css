@@ -29,19 +29,9 @@
   	border: 2px dashed black;
 	text-align:center;
 	}
-	.btnn{
-	background-color:#a49bc6;
-	color:white;
-	border-radius:5px;
-
-	}
 	
-	th{
-	background-color:#e8ddcb;
-	}
-	td{
-	background-color:#e8ddcb;
-	}
+	
+	
 	a{
 	text-decoration:none;
 	color:black;
@@ -49,5 +39,4 @@
 	a:hover{
 	 color:#a58680;
 	}
-	
 	
