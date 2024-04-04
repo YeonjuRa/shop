@@ -14,5 +14,5 @@
 	<a href="">other</a>
 	<!-- 회원정보 수정 -->
 	<br>
-	<a href=""><%=(String)loginMember.get("empId")%></a>님 안녕하세요 :)
+	<a href=""><%=(String)loginMember.get("empName")%></a>님 안녕하세요 :)
 </div>

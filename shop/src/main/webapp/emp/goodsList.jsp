@@ -19,6 +19,8 @@
 		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	//페이징
 	
+		
+	
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null){
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -29,11 +31,25 @@
 		
 		//lastPage 구하기
 		
-		String pageSql = "select count(*) from goods";
-		
+		String pageSql = null;
+		String category = request.getParameter("category");
+		//category가 null일경우 제거
 		PreparedStatement pageStmt = null;
 		ResultSet pageRs = null;
-		pageStmt = con.prepareStatement(pageSql);
+		if(category == null){
+			category = "";
+		}
+		//전체 상품갯수 // 카테고리별 상품갯수 분기하기
+		if(category == ""){
+			pageSql = "select count(*) from goods";
+			pageStmt = con.prepareStatement(pageSql);
+		}else{
+			pageSql = "select count(*) from goods where category =?";
+			pageStmt = con.prepareStatement(pageSql);
+			pageStmt.setString(1,category);
+		}
+		
+		
 		pageRs = pageStmt.executeQuery();
 		
 		int totalRow = 0;
@@ -52,11 +68,8 @@
 	select * from goods where category =?
 	*/
 	
-	String category = request.getParameter("category");
-	//category가 null일경우 제
-	if(category == null){
-		category = "";
-	}
+	
+	
 	
 %>
 <!--ㅡMOdell Layer  -->
@@ -134,17 +147,49 @@
 <link href="./stylesheet.css" rel="stylesheet">
 </head>
 <body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ps-5" href="#">Storemade</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">상품관리</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    
+    </ul>
+   
+  	</div>
+	</nav>
+	
+	</header>
 	<div style="jusify-content:center;">
 	
-	<div style="text-align:center;">
+	
 	<div>
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	</div>
 	
-	
-	
-	
-	</div>
 	<!-- 리스트 출력 -->
 	<div style="justify-content:center;text-align:center;">
 	
@@ -186,7 +231,7 @@
 			//6번째 박스마다 줄바꿈위해clear both 속성 추가해주
 			int floatBoxCnt = 0;
 			for(HashMap gpc: goodsPerCategory){
-				if(category == ""){
+				if(category == "" | category.equals(category)){
 					if(floatBoxCnt%5 == 0){
 		%>	
 		
@@ -207,103 +252,20 @@
 			
 		<% 		
 					}
-				}else if(category.equals("가방")){
-					if(floatBoxCnt%5 == 0){
-					
-		%>			
-				<a href="#" style="float:left; clear:both;">
-					<img src="./referencebag.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				</a>
-		
-		<%
-					}else{
-		%>
-				<a href="#" style="float:left;">
-					<img src="./referencebag.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				</a>
-		
-		<%
-					}
-				}else if(category.equals("상의")){
-					if(floatBoxCnt%5 == 0){
-					
-		%>			
-				<a href="#" style="float:left; clear:both;">
-					<img src="./referenceshirts.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				</a>
-				
-			
-		<%
-					}else{
-		%>			
-				<a href="#" style="float:left;">
-					<img src="./referenceshirts.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				</a>	
-		
-		<% 
-					}
-				}else if(category.equals("액세서리")){
-					if(floatBoxCnt%5 == 0){
-				
-		%>			
-				<a href="#" style="float:left;clear:both;">
-					<img src="./referenceac.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				
-				</a>
-		<% 		
-					}else{
-		%>
-				<a href="#" style="float:left;">
-					<img src="./referenceac.png" width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				
-				</a>
-		
-		<% 
-					}
-				}else if(category.equals("원피스")){
-					if(floatBoxCnt%5 == 0){
-			
-		%>			
-				<a href="#" style="float:left;clear:both;">
-					<img src="./reference1.png"  width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				
-				</a>
-		<% 			}else{
-		%>
-				<a href="#" style="float:left;">
-					<img src="./reference1.png"  width="150" height="150">
-					<div><%=(String)(gpc.get("goodsTitle"))%></div>
-					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
-				
-				</a>
-				
-		<% 
+				}
 	
+				floatBoxCnt += 1;
 						}
-			}		
-		
+				
+				
 		%>
 			
 		
 		
 		<% 
-			floatBoxCnt += 1;
+			
 			//System.out.println(floatBoxCnt);
-			}
+			
 		
 		
 		%>
