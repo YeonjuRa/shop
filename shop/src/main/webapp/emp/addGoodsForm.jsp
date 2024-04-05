@@ -42,7 +42,7 @@
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	</div>
 	<h1>상품등록</h1>
-	<form method="post" action="/shop/emp/addGoodsAction.jsp">
+	<form method="post" action="/shop/emp/addGoodsAction.jsp" enctype="multipart/form-data">
 	<div>
 		<select name="category">
 			<option value="">선택</option>
@@ -66,6 +66,10 @@
 	<div>
 		goods amount:
 		<input type="text" name="goodsAmount">
+	</div>
+	<div>
+		goods image:
+		<input type="file" name="goodsImg">
 	</div>
 	<div>
 		goodsTitle:

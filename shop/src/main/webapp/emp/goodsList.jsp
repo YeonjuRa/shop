@@ -117,10 +117,10 @@
 	
 	while(rs2.next()){
 		HashMap<String,Object> gpc = new HashMap<String,Object>();
-		gpc.put("category", rs2.getInt("goods_no"));
-		
+	
+		gpc.put("goodsNo",rs2.getInt("goods_no"));
 		gpc.put("goodsTitle", rs2.getString("goods_title"));
-		
+		gpc.put("fileName", rs2.getString("filename"));
 		gpc.put("goodsPrice", rs2.getInt("goods_price"));
 		
 		goodsPerCategory.add(gpc);
@@ -131,6 +131,7 @@
 	System.out.println(categoryList);
 	System.out.println(goodsPerCategory);
 	 
+
 
 %>
 <!--view Layer  -->
@@ -160,16 +161,16 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">상품관리</a>
+        <a class="nav-link" href="#">ㅁㅁㅁ</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          상품관리
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">상품등록</a>
+          <a class="dropdown-item" href="#">상품 리스트</a>
+          <div class="dropdown-divider">상품 삭제</div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
@@ -183,20 +184,14 @@
 	</nav>
 	
 	</header>
-	<div style="jusify-content:center;">
-	
-	
-	<div>
+<div class="container-fluid">	
+	<div class="row">
+	<!--  서브메뉴 -->
+	<div class="col-2 text-center">
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	</div>
 	
-	<!-- 리스트 출력 -->
-	<div style="justify-content:center;text-align:center;">
-	
-	<h3>OUR PRODUCTS</h3>
-	
-	<!-- 메뉴 사이드 출력  -->
-	<div>
+	<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
+	<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
 	<div style="float:left; width:200px; height:500px;  margin-left:30px; margin-top:5px; margin-right:20px;" class="sidemenu">
 		<div>
 		<a href="/shop/emp/goodsList.jsp" class="mt-2">전체</a>
@@ -223,8 +218,15 @@
 		</div>
 		
 	</div>
+	</div>
 	
-	<div class="goods" style="width:80%; float:right; margin-left:10px;">
+	<div class="col-10">
+		<div style="justify-content:center;text-align:center;">
+	
+	<h3>OUR PRODUCTS</h3>
+	
+	
+	<div>
 	
 	
 		<%
@@ -235,8 +237,10 @@
 					if(floatBoxCnt%5 == 0){
 		%>	
 		
-			<a href="#" style="float:left; clear:both;">
-					<img src="./reference1.png" width="150" height="150">
+			<a href="./goodsDetail.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left; clear:both;">
+					
+					<img src="../upload/<%=(String)(gpc.get("fileName"))%>" width="150" height="150">
+					
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
 					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 			</a>
@@ -244,8 +248,8 @@
 		<%			
 					}else{
 		%>			
-			<a href="#" style="float:left;">
-					<img src="./reference1.png" width="150" height="150">
+			<a href="./goodsDetail.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left;">
+					<img src="../upload/<%=(String)(gpc.get("fileName"))%>" width="150" height="150">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
 					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>
 			</a>
@@ -312,6 +316,14 @@
 				</ul>
 				
 			</div>
+	
+	
+	
+	</div>
+
+	
+
+	
 			
 </body>
 </html>

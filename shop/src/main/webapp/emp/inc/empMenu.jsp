@@ -8,9 +8,12 @@
 %>
 <div>
 	<a href="/shop/emp/empList.jsp">사원관리</a>
+	<br>
 	<!-- category CRUD -->
 	<a href="/shop/emp/categoryList.jsp">카테고리 관리</a>
+	<br>
 	<a href="/shop/emp/goodsList.jsp">상품관리</a>
+	<br>
 	<a href="">other</a>
 	<!-- 회원정보 수정 -->
 	<br>

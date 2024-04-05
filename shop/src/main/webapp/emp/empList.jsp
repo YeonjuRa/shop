@@ -110,14 +110,18 @@
 <link href="./stylesheet.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-	<div class="inner">
+<div class="container-fluid">	
+<div class="row">
+<!--  서브메뉴 -->
+	<div class="col-2 text-center">
+	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	
-	<h2 style="text-decoration:underline; margin:10px;">STOREMADE</h2>
 	<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
 	<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	<h2>사원목록</h2>
+	</div>
+	
+	<div class="col-10">
+		<h2>사원목록</h2>
 	
 	<table class="table table-hover">
 		<tr>
@@ -162,6 +166,11 @@
 		
 		
 	</table>
+	
+	
+	
+	</div>
+	
 		<!-- 페이징 넘기기-->
 				<div class="text-center mt-2"><%=currentPage%></div>
 				
@@ -209,6 +218,7 @@
 	</div>
 	
 </div>
+
 <div style="text-align:center;margin-top:50px;"><a href="./empLogoutAction.jsp" style="width:50px;
 	height:30px;display: inline-block;">로그아웃</a></div>
 </body>

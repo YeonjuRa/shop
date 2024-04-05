@@ -11,26 +11,6 @@
 	body{
 		background-color:#f8faca;
 	}
-	.container{
-		display: flex;
-  		justify-content: center;
-  		flex-direction:row;
-  		align-items: center;
-	}
-	.inner{
-	position: absolute;
- 	top: 50%;
- 	left: 50%;
-  	transform: translate(-50%,-50%); 
-  	background-color:#ffffff;
-  	width:80%;
-  	height:80%;
-  	border-radius:10px;
-  	border: 2px dashed black;
-	text-align:center;
-	}
-	
-	
 	
 	a{
 	text-decoration:none;
