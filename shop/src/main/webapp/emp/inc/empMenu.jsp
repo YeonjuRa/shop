@@ -6,16 +6,45 @@
 
 
 %>
-<div>
-	<a href="/shop/emp/empList.jsp">사원관리</a>
-	<br>
-	<!-- category CRUD -->
-	<a href="/shop/emp/categoryList.jsp">카테고리 관리</a>
-	<br>
-	<a href="/shop/emp/goodsList.jsp">상품관리</a>
-	<br>
-	<a href="">other</a>
-	<!-- 회원정보 수정 -->
-	<br>
-	<a href=""><%=(String)loginMember.get("empName")%></a>님 안녕하세요 :)
-</div>
+<style>
+	header{
+	font-size:20px;
+	border-bottom:1px solid;
+	}
+	ul{display: table;margin-left: auto; margin-right: auto;}
+	
+</style>
+
+<header>
+		<nav class="navbar navbar-expand-lg navbar-white bg-white">
+  <a class="navbar-brand" style="padding-left:5%;"href="#">Storemade</a>
+  
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./goodsList.jsp">상품 관리</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./empList.jsp">사원 관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./categoryList.jsp">카테고리 관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Other</a>
+      </li>
+      
+    </ul>
+   	
+  	</div>
+  		<a href="" class=""><%=(String)loginMember.get("empName")%></a>님 안녕하세요 :)
+    	<a class="nav-link float-right ms-5 me-5" href="./empLogoutAction.jsp"><img src="./logoutIcon.png" style="width:30px; height:30px; border:0px;"></a>
+	</nav>
+	
+	</header>
+
+	

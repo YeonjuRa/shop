@@ -5,12 +5,7 @@
 
 <!-- Controller Layer -->
 <%
-	//인정분기 : 세션변수 이름 - loginEmp
-	if(session.getAttribute("loginEmp") == null){
-		response.sendRedirect("/shop/emp/empLoginForm.jsp");
-		return;
-	}
-	System.out.println(session.getAttribute("loginEmp"));
+	
 	
 	//요청분석
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -145,25 +140,25 @@
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="./stylesheet.css" rel="stylesheet">
+<link href="../emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
-	<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
+	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+	
+	
 	<div class="container-fluid">
 	<div class="row">
 	<!--  서브메뉴 -->
-	<div class="col-2 text-center mt-2 " style="font-size:20px;background-color:#d9c1e3;border-radius:10px;">
+	<div class="col-2 text-center mt-2 " style="font-size:17px;background-color:#ffffff;border-radius:10px;">
 		<br>
-		<a href="/shop/emp/goodsList.jsp"><b>전체</b></a>
+		<a href="/shop/customer/customerGoodsList.jsp"><b>전체</b></a>
 		<hr>
 		<%
 			for(HashMap m : categoryList){
 				
 		%>
 			
-			<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
+			<a href="/shop/customer/customerGoodsList.jsp?category=<%=(String)(m.get("category"))%>">
 					<%=(String)(m.get("category"))%>
 					(<%=(Integer)(m.get("cnt"))%>)
 			</a>
@@ -174,11 +169,6 @@
 			}
 
 		%>
-
-	
-		<div style="font-weight:bold;">
-			<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>
-		</div>
 		
 	</div>
 
@@ -197,26 +187,26 @@
 					if(currentPage > 1){
 			
 				%>
-					<li ><a href="./goodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
-					<li><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">&nbsp; < 이전 </a></li>
+					<li ><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">&nbsp; < 이전 </a></li>
 				<%
 					}else{
 				%>	
-					<li ><a href="./goodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
-					<li><a href="./goodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> &nbsp;< 이전 </a></li>
+					<li ><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> &nbsp;< 이전 </a></li>
 					
 				<%	
 					}
 					if(currentPage<lastPage){
 				%>
-					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp;| 다음 > </a></li>
-					<li><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp;| 다음 > </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
 				<%
 					}else{
 						
 				%>
-					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>"> &nbsp;다음 ></a></li>
-					<li><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>"> &nbsp;다음 ></a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
 				
 				<% 
 					}

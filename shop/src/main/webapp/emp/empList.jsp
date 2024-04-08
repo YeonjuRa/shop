@@ -108,22 +108,25 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="./stylesheet.css" rel="stylesheet">
+<style>
+	ul{
+		display: table;
+ 	 	margin-left: auto;
+ 	 	margin-right: auto;
+	}
+
+</style>
 </head>
 <body>
-<div class="container-fluid">	
-<div class="row">
-<!--  서브메뉴 -->
-	<div class="col-2 text-center">
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
+<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
+<div class="container">	
+
+
+		<div><h2 class="mt-5 text-center">사원목록</h2></div>
 	
-	<!-- include로 메뉴 출력, empMenu.jsp include : 주체가 server -->
-	<!-- 주체가 서버이기에 include할때는 절대주소가 /shop/...시작하지 않는다... -->
-	</div>
-	
-	<div class="col-10">
-		<h2>사원목록</h2>
-	
-	<table class="table table-hover">
+	<table class="table table-hover text-center">
 		<tr>
 			<th>ACTIVE</th>
 			<th>EMP ID</th>
@@ -169,57 +172,48 @@
 	
 	
 	
-	</div>
+		<!-- 페이징 -->
+		<div class="text-center mt-2"><%=currentPage%></div>
 	
-		<!-- 페이징 넘기기-->
-				<div class="text-center mt-2"><%=currentPage%></div>
+		<div style="height:40px;display: table;margin-left: auto; margin-right: auto;">
 				
-				
-				<!-- 페이징 버튼 -->
-		<div style="clear:both;height:40px;display: grid;place-items: center;" class="mt-3">
-				
-				<ul class="paging" style="text-align:center;">
+				<ul class="text-center">
 				
 				
 				<%
 					if(currentPage > 1){
 			
 				%>
-					<li ><a href="./empList.jsp?currentPage=1"> << 처음 페이지 </a></li>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>"> < 이전 </a></li>
+					<li ><a href="./empList.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
 				<%
 					}else{
 				%>	
-					<li ><a href="./empList.jsp?currentPage=1"> << 처음 페이지 </a></li>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>"> < 이전 </a></li>
+					<li ><a href="./empList.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
 					
 				<%	
 					}
 					if(currentPage<lastPage){
 				%>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>">&nbsp; 다음 > </a></li>
-					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >></a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>">&nbsp;| 다음 > &nbsp;</a></li>
+					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
 				<%
 					}else{
 						
 				%>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>"> 다음 ></a></li>
-					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >></a></li>
+					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>"> 다음 >&nbsp;</a></li>
+					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
 				
 				<% 
 					}
 				
 				%>
 				</ul>
-				
 			</div>
 				
 	
 	</div>
 	
-</div>
-
-<div style="text-align:center;margin-top:50px;"><a href="./empLogoutAction.jsp" style="width:50px;
-	height:30px;display: inline-block;">로그아웃</a></div>
 </body>
 </html>
