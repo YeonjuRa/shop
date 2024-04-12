@@ -3,14 +3,14 @@
 <%@ page import="java.util.*" %>
 <%
 	//회원가입 폼에서 입력 값 받아오기
-	String mailId = request.getParameter("mailId");
+	String mailIdChecked = request.getParameter("mailIdChecked");
 	String pw = request.getParameter("pw");
 	String name = request.getParameter("name");
 	String birth = request.getParameter("birth");
 	String gender = request.getParameter("gender");
 	
 	//디버깅
-	System.out.println(mailId);
+	System.out.println(mailIdChecked);
 	System.out.println(pw);
 	System.out.println(name);
 	System.out.println(birth);
@@ -28,7 +28,7 @@
 	String sql = "insert into customer (mail,pw,name, birth,gender,update_date,create_date) values (?,password(?),?,?,?,now(),now())";
 	stmt = con.prepareStatement(sql);
 	
-	stmt.setString(1, mailId);
+	stmt.setString(1, mailIdChecked);
 	stmt.setString(2, pw);
 	stmt.setString(3, name);
 	stmt.setString(4, birth);

@@ -41,7 +41,7 @@
     </ul>
    	
   	</div>
-  		<a href="" class=""><%=(String)loginMember.get("empName")%></a>님 안녕하세요 :)
+  		<a href="./empOne.jsp?empId=<%=(String)loginMember.get("empId")%>" ><%=(String)loginMember.get("empName")%></a>님 안녕하세요 :)
     	<a class="nav-link float-right ms-5 me-5" href="./empLogoutAction.jsp"><img src="./logoutIcon.png" style="width:30px; height:30px; border:0px;"></a>
 	</nav>
 	

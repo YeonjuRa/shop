@@ -3,7 +3,7 @@
 
 	session.invalidate(); //세션공간 초기화 (포맷)
 
-	response.sendRedirect("./empLoginForm.jsp");
+	response.sendRedirect("/shop/customer/mainCustomer.jsp");
 
 
 %>

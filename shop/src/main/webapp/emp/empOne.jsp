@@ -10,9 +10,10 @@
 		return;
 	}
 	
-	
-	
-	
+
+	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginEmp"));
+
+
 %>
 <%
 	//emp 테이블에서 가입시 입력한 정보 가져와서 채우기
@@ -36,9 +37,8 @@
 	while(rs.next()){
 		HashMap<String,Object> empInfo = new HashMap<String,Object>();
 		
-		
+		empInfo.put("empId",rs.getString("emp_id"));
 		empInfo.put("grade", rs.getInt("grade"));
-		empInfo.put("empId", rs.getString("emp_id"));
 		empInfo.put("empName", rs.getString("emp_name"));
 		empInfo.put("empJob", rs.getString("emp_job"));
 		empInfo.put("hireDate", rs.getString("hire_date"));
@@ -57,7 +57,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>사원 정보 수정</title>
+	<title>사원 정보 보기</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,41 +65,40 @@
 </head>
 <body>
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	<form method="post" action="/shop/emp/updateEmpAction.jsp">
+	<h4>사원 정보 보기</h4>
+	
 	<table>
 	<%
 		for(HashMap c : empUpdateInfo){
 	%>
 		<tr>
 			<td>ID : </td>
-			<td><input type="text" name="empId" value="<%=(String) c.get("empId")%>" readonly></td>
+			<td><%=(String) c.get("empId")%></td>
 		</tr>
 		
 		<tr>
 			<td>grade : </td>
-			<td><input type="text" name="grade" readonly value="<%=(Integer) c.get("grade")%>"></td>
+			<td><%=(Integer) c.get("grade")%></td>
 		</tr>
 		<tr>
 			<td>Name :</td>
-			<td><input type="text" name="name" value="<%=(String) c.get("empName")%>"></td>
+			<td><%=(String) c.get("empName")%></td>
 		</tr>
 		<tr>
 			<td>Department :</td>
-			<td>
-				<select name="dmt">
-					<option value="<%=(String) c.get("empJob")%>"><%=(String) c.get("empJob")%></option>
-					<option value="인사">인사</option>
-					<option value="개발">개발</option>
-					<option value="마케팅">마케팅</option>
-					<option value="영업">영업</option>
-				
-				</select>
-	
-		</td>
+			<td><%=(String) c.get("empJob")%></td>
 		</tr>
 		<tr>
 			<td>Hire Date :</td>
-			<td><input type="date" name="hireDate" value="<%=(String) c.get("hireDate")%>"></td>
+			<td><%=(String) c.get("hireDate")%></td>
+		</tr>
+		<tr>
+			<td>update Date :</td>
+			<td><%=(String) c.get("updateDate")%></td>
+		</tr>
+		<tr>
+			<td>create Date :</td>
+			<td><%=(String) c.get("createDate")%></td>
 		</tr>
 	
 	
@@ -107,10 +106,10 @@
 		}
 	
 	%>
-	
 	</table> 
-	<div style="margin:10px"><button type="submit" class="btnn" >정보 수정하기</button></div>
+	
+	<div><a href="./updateEmpForm.jsp?empId=<%=(String)loginMember.get("empId")%>">사원 정보 수정하기</a></div>
 	&#127826
-	</form>
+	
 </body>
 </html>
