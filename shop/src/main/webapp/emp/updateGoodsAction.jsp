@@ -3,6 +3,7 @@
 <%@ page import="java.nio.file.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="shop.dao.*"%>
 
 <!-- Controller Layer -->
 <%
@@ -22,12 +23,9 @@
 %>
 <!-- model Layer -->
 <%	
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	
 	int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
+	String empId = (String)loginMember.get("empId");
 	String category = request.getParameter("category");
 	int goodsPrice = Integer.parseInt(request.getParameter("goodsPrice"));
 	int goodsAmount= Integer.parseInt(request.getParameter("goodsAmount"));
@@ -43,27 +41,15 @@
 	System.out.println(ext);
 		
 	UUID uuid = UUID.randomUUID();
+	
 	String filename = uuid.toString().replace("-","");
 	filename = filename +ext;
 	
 	
 	System.out.println(filename + "<--파일이름 디버깅 :updateGoodsAct");	
-	
-	PreparedStatement stmt = null;
-	
-	String sql = "update goods set category=?,emp_id=?,goods_price=?,goods_amount=?,goods_title=?,filename=?, goods_content=?,update_date=now() where goods_no=?";
-	stmt = con.prepareStatement(sql);
-	stmt.setString(1,category);
-	stmt.setString(2,(String)(loginMember.get("empId")));
-	stmt.setInt(3,goodsPrice);
-	stmt.setInt(4,goodsAmount);
-	stmt.setString(5,goodsTitle);
-	stmt.setString(6,filename);
-	stmt.setString(7,goodsContent);
-	stmt.setInt(8,goodsNo);
-	System.out.println(stmt +"stmt 확인 --> updateGoodsAction");
-	
-	int row = stmt.executeUpdate();
+	//updateGoods 쿼리 날리기
+	int row = GoodsDAO.updateGoodsList(goodsNo, empId, category, goodsPrice, goodsAmount, goodsTitle, goodsContent, filename);
+
 	if(row != 0){ //파일 업로드 part ->is -> os-> 빈 파일
 		//1번
 		InputStream is = part.getInputStream();

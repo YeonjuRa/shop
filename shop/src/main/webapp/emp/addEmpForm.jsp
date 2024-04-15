@@ -74,12 +74,12 @@
 	</tr>
 	<tr>
 		<td>Name :</td>
-		<td><input type="text" name="name"></td>
+		<td><input type="text" name="empName"></td>
 	</tr>
 	<tr>
 		<td>Department :</td>
 		<td>
-			<select name="dmt">
+			<select name="empJob">
 				<option value="">선택</option>
 				<option value="인사">인사</option>
 				<option value="개발">개발</option>

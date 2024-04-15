@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*"%>
+<%@ page import="shop.dao.*"%>
 
 <!-- Controller Layer -->
 <%
@@ -11,15 +12,10 @@
 		return;
 	}
 	System.out.println(session.getAttribute("loginEmp"));
-	
-	//요청분석
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	//페이징
-	
-		
+%>
+
+<%
+
 	
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null){
@@ -28,111 +24,26 @@
 		
 		int rowPerPage = 15;
 		int startRow = (currentPage-1) * rowPerPage;
-		
-		//lastPage 구하기
-		
-		String pageSql = null;
-		String category = request.getParameter("category");
-		//category가 null일경우 제거
-		PreparedStatement pageStmt = null;
-		ResultSet pageRs = null;
-		if(category == null){
-			category = "";
-		}
-		//전체 상품갯수 // 카테고리별 상품갯수 분기하기
-		if(category == ""){
-			pageSql = "select count(*) from goods";
-			pageStmt = con.prepareStatement(pageSql);
-		}else{
-			pageSql = "select count(*) from goods where category =?";
-			pageStmt = con.prepareStatement(pageSql);
-			pageStmt.setString(1,category);
-		}
-		
-		
-		pageRs = pageStmt.executeQuery();
-		
-		int totalRow = 0;
-		if(pageRs.next()){
-			totalRow = pageRs.getInt("count(*)");
-		}
-		int lastPage = totalRow/rowPerPage;
-		if(totalRow%rowPerPage != 0){
-			lastPage = lastPage +1;
-		}
-	
-	/*
-	category가 null이면
-	select * from goods
-	null이 아니면 
-	select * from goods where category =?
-	*/
-	
-	
-	
-	
+
 %>
 <!--ㅡMOdell Layer  -->
 <%
-	
-	
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null;
-	String sql1 = "select category, count(*) cnt from goods group by category order by category asc";
-	stmt1 = con.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
-	ArrayList<HashMap<String, Object>> categoryList =
-			new ArrayList<HashMap<String, Object>>();
-	while(rs1.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("category", rs1.getString("category"));
-		m.put("cnt", rs1.getInt("cnt"));
-		categoryList.add(m);
+	String category = request.getParameter("category");
+	if(category == null){
+		category = "";
 	}
-
-	
-	
-	ResultSet rs2 = null;
-	String sql2 = null;
-	PreparedStatement stmt2 = null;
-	//전체상품출력과 선택목록 출력 분
-	if(category == ""){
-		sql2 = "select * from goods limit ?,?";
-		stmt2 = con.prepareStatement(sql2);
-		stmt2.setInt(1, startRow);
-		stmt2.setInt(2, rowPerPage);
-	}else{
-		sql2 = "select * from goods where category=? limit ?,?";
-		stmt2 = con.prepareStatement(sql2);
-		stmt2.setString(1,category);
-		stmt2.setInt(2, startRow);
-		stmt2.setInt(3, rowPerPage);
-	}
-	
-	
-	rs2 = stmt2.executeQuery();
+	//페이징
+	int lastPage = GoodsDAO.page(category);
+	//카테고리 리스트 출력
+	ArrayList<HashMap<String, Object>> categoryList = GoodsDAO.selectCategoryList();
 	
 	//Arraylist에 넣기
-	ArrayList<HashMap<String,Object>> goodsPerCategory = new ArrayList<HashMap<String,Object>>();
+	ArrayList<HashMap<String,Object>> goodsList = GoodsDAO.selectGoodsList(category, startRow, rowPerPage);
 	
-	while(rs2.next()){
-		HashMap<String,Object> gpc = new HashMap<String,Object>();
 	
-		gpc.put("goodsNo",rs2.getInt("goods_no"));
-		gpc.put("goodsTitle", rs2.getString("goods_title"));
-		gpc.put("fileName", rs2.getString("filename"));
-		gpc.put("goodsPrice", rs2.getInt("goods_price"));
-		
-		goodsPerCategory.add(gpc);
-		
-		
-	}
 	//디버깅
 	System.out.println(categoryList);
-	System.out.println(goodsPerCategory);
-	 
-
-
+	
 %>
 <!--view Layer  -->
 <!DOCTYPE html>
@@ -232,7 +143,7 @@
 		<%
 			//6번째 박스마다 줄바꿈위해clear both 속성 추가해주
 			int floatBoxCnt = 0;
-			for(HashMap gpc: goodsPerCategory){
+			for(HashMap gpc: goodsList){
 				if(category == "" | category.equals(category)){
 					if(floatBoxCnt%5 == 0){
 		%>	
