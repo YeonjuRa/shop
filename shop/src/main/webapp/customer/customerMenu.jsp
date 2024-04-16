@@ -33,7 +33,7 @@
   	<%
   		}else{
   	%>		
-  		<div class="text-end bg-white"><a href="./customerOne.jsp?id=<%=(String)loginMember.get("cusId")%>"><%=(String)loginMember.get("name")%></a>님 안녕하세요 :)
+  		<div class="text-end bg-white"><a href="./customerOne.jsp?id=<%=(String)loginMember.get("mail")%>"><%=(String)loginMember.get("name")%></a>님 안녕하세요 :)
     	<a class=" float-right ms-5 me-5" href="./logoutCustomer.jsp"><img src="../emp/logoutIcon.png" style="width:30px; height:30px; border:0px;">
     	</a></div>
   	

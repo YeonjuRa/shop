@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="java.sql.*" %>
+<%@ page import="shop.dao.*" %>
 
 
 <!-- update할 값 가져오기 -->
@@ -11,10 +11,6 @@
 %>
 <!-- model Layer -->
 <%	
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	
 	
 	String id = request.getParameter("id");
@@ -23,6 +19,8 @@
 	String gender = request.getParameter("gender");
 	
 	
+	
+	CustomerDAO.
 	PreparedStatement stmt = null;
 	
 	String sql = "update customer set name=?,birth=?,gender=?, update_date=now() where mail=?";

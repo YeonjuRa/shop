@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.util.*" %>
+<%@ page import="shop.dao.*"%>
+
 <%
 	//회원가입 폼에서 입력 값 받아오기
 	String mailIdChecked = request.getParameter("mailIdChecked");
@@ -18,23 +18,8 @@
 
 	
 	//디비연결
-	//sql -> insert into (customer mail,pw,name, birth,gender,update_date,create_date) values (?,?,?,?,?,now(),now())
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	PreparedStatement stmt = null;
+	int row = CustomerDAO.registerCustomer(mailIdChecked, pw, name, birth, gender);
 	
-	con = DriverManager.getConnection(
-			"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	String sql = "insert into customer (mail,pw,name, birth,gender,update_date,create_date) values (?,password(?),?,?,?,now(),now())";
-	stmt = con.prepareStatement(sql);
-	
-	stmt.setString(1, mailIdChecked);
-	stmt.setString(2, pw);
-	stmt.setString(3, name);
-	stmt.setString(4, birth);
-	stmt.setString(5, gender);
-	
-	int row = stmt.executeUpdate();
 	if(row  != 0){
 		System.out.println("회원가입 성공");
 		response.sendRedirect("./mainCustomer.jsp");

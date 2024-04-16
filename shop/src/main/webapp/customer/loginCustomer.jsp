@@ -80,11 +80,11 @@
 	<table>
 	<tr>
 		<td>ID(MAIL) : </td>
-		<td><input type="email" name="cusId"></td>
+		<td><input type="email" name="mail"></td>
 	</tr>
 	<tr>
 		<td>PW :</td>
-		<td><input type="password" name="cusPw"></td>
+		<td><input type="password" name="pw"></td>
 	</tr>
 	</table> 
 	<div style="margin:10px"><button type="submit" class="btnn" >로그인</button></div>

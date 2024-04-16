@@ -27,6 +27,7 @@
 		
 		
 		cusInfo.put("id", rs.getString("mail"));
+		cusInfo.put("pw", rs.getString("pw"));
 		cusInfo.put("name", rs.getString("name"));
 		cusInfo.put("birth", rs.getString("birth"));
 		cusInfo.put("gender", rs.getString("gender"));
@@ -62,7 +63,10 @@
 			<td>ID (Mail) : </td>
 			<td><input type="text" name="id" value="<%=(String) c.get("id")%>" readonly></td>
 		</tr>
-		
+		<tr>
+			<td>PW : </td>
+			<td><input type="text" name="pw" value="<%=(String) c.get("pw")%>"></td>
+		</tr>
 		<tr>
 			<td>Name : </td>
 			<td><input type="text" name="name" value="<%=(String) c.get("name")%>"></td>
