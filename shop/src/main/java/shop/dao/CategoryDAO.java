@@ -53,4 +53,17 @@ public class CategoryDAO {
 		con.close();
 		return row;
 	}
+	public static int deleteCategory (String category)throws Exception {
+		int row = 0;
+		Connection con = DBHelper.getConnection();
+		String sql = "delete from category where category =?";
+		//넘어온 카테고리명과 일치하는 행만 삭제
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1,category);
+		
+		row = stmt.executeUpdate();
+		
+		con.close();
+		return row;
+	}
 }

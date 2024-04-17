@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page import ="shop.dao.*" %>
 <%@ page import="java.util.*" %>
 
 <%
@@ -18,38 +18,10 @@
 	//emp 테이블에서 가입시 입력한 정보 가져와서 채우기
 	
 	String empId = request.getParameter("empId");
-	//id 기준
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-	
-	String sql = "select * from emp where emp_id = ?";
-	stmt = con.prepareStatement(sql);
-	stmt.setString(1,empId);
-	rs = stmt.executeQuery();
 	
 	//리스트에 넣기
-		ArrayList<HashMap<String,Object>> empUpdateInfo = new ArrayList<HashMap<String,Object>>();
-	while(rs.next()){
-		HashMap<String,Object> empInfo = new HashMap<String,Object>();
-		
-		
-		empInfo.put("grade", rs.getInt("grade"));
-		empInfo.put("empId", rs.getString("emp_id"));
-		empInfo.put("empName", rs.getString("emp_name"));
-		empInfo.put("empJob", rs.getString("emp_job"));
-		empInfo.put("hireDate", rs.getString("hire_date"));
-		empInfo.put("updateDate", rs.getString("update_date"));
-		empInfo.put("createDate", rs.getString("create_date"));
-		
-		
-		
-		empUpdateInfo.add(empInfo);
-		
-	}
+		ArrayList<HashMap<String,Object>> empUpdateInfo = EmpDAO.updateEmpForm(empId);
+
 	
 
 %>
@@ -86,7 +58,7 @@
 		<tr>
 			<td>Department :</td>
 			<td>
-				<select name="dmt">
+				<select name="empJob">
 					<option value="<%=(String) c.get("empJob")%>"><%=(String) c.get("empJob")%></option>
 					<option value="인사">인사</option>
 					<option value="개발">개발</option>

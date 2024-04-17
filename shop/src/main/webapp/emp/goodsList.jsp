@@ -139,7 +139,6 @@
 	
 	<div>
 	
-	
 		<%
 			//6번째 박스마다 줄바꿈위해clear both 속성 추가해주
 			int floatBoxCnt = 0;
@@ -172,29 +171,21 @@
 				floatBoxCnt += 1;
 						}
 				
-				
 		%>
-			
-		
 		
 		<% 
 			
 			//System.out.println(floatBoxCnt);
 			
 		
-		
 		%>
 		</div>
 		</div>
 		</div>
 		
 	
-	
-	
 	</div>
 	</div>
-	
-
 	
 			
 </body>

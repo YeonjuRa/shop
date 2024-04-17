@@ -3,9 +3,6 @@ package shop.dao;
 import java.sql.*;
 import java.util.*;
 
-import dao.CustomerDAO;
-import dao.DBHelper;
-
 
 public class CustomerDAO {
 		//회원가입 시 아이디 중복확인하기

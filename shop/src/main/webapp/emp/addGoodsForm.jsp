@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="shop.dao.*" %>
 <%@ page import="java.util.*" %>
 
 <%
@@ -14,21 +14,9 @@
 %>
 <!--ㅡMOdell Layer  -->
 <%
-	//디비 연결
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null;
-	String sql1 = "select category from category";
-	stmt1 = con.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
 	
-	ArrayList<String> categoryList = new ArrayList<String>();
-	while(rs1.next()){
-		categoryList.add(rs1.getString("category"));
-	}
+	
+	ArrayList<String> categoryList = CategoryDAO.categoryList();
 
 %>
 <!DOCTYPE html>

@@ -3,6 +3,7 @@
 <%@ page import="java.nio.file.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="shop.dao.*" %>
 
 <!-- Controller Layer -->
 <%
@@ -18,11 +19,12 @@
 <!-- session 설정값 입력시 로그인 emp 의 emp id 값이 필요하다 -->
 <%
 	HashMap<String,Object> loginMember = (HashMap<String,Object>) (session.getAttribute("loginEmp"));
+
 	int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
 %>
 <!-- model Layer -->
 <%	
-	Class.forName("org.mariadb.jdbc.Driver");
+	/* Class.forName("org.mariadb.jdbc.Driver");
 	Connection con = null;
 	con = DriverManager.getConnection(
 		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
@@ -44,18 +46,17 @@
 		filename = rs.getString("filename");
 	
 	}
-	//파일 지우기
+	//upload 폴더에서 업로드 된 파일도 지우기
 	String filePath = request.getServletContext().getRealPath("upload");
 	File df = new File(filePath,filename);
 	df.delete(); 
 	System.out.println("파일삭제 완료");
-	
+	 */
+	 
+	 
 	//데이터 베이스 에서 행 지우기
-	PreparedStatement stmt2 =  null;
-	String deleteSql = "delete from goods where goods_no = ?";
-	stmt2 = con.prepareStatement(deleteSql);
-	stmt2.setInt(1,goodsNo);
-	int row = stmt2.executeUpdate();
+	
+	int row = GoodsDAO.deleteGoodsAction(goodsNo);
 	if(row != 0){
 		System.out.println("해당 상품 삭제 성공");
 		response.sendRedirect("./goodsList.jsp");

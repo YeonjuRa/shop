@@ -141,6 +141,8 @@ public class GoodsDAO {
 				m.put("goodsContent", rs.getString("goods_content"));
 				m.put("goodsPrice", rs.getInt("goods_price"));
 				m.put("goodsAmount", rs.getInt("goods_amount"));
+				m.put("updateDate", rs.getString("update_date"));
+				m.put("createDate", rs.getString("create_date"));
 				
 				
 				updateGoodsForm.add(m);
@@ -149,5 +151,38 @@ public class GoodsDAO {
 		con.close();
 		return updateGoodsForm;
 	}
-	
+	public static int deleteGoodsAction(int goodsNo) throws Exception {
+		int row = 0;
+		Connection con = DBHelper.getConnection();
+		String sql = "delete from goods where goods_no = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,goodsNo);
+		
+		
+		
+		row = stmt.executeUpdate();
+		
+		con.close();
+		return row;
+	}
+	public static int addGoodsAction(String category ,String empId, int goodsPrice,int goodsAmount,String goodsTitle,String goodsContent,String filename) throws Exception{
+		String sql = "insert into goods (category,emp_id,goods_price,goods_amount,goods_title,filename, goods_content,update_date,create_date) values(?,?,?,?,?,?,?,now(),now())";
+		Connection con = DBHelper.getConnection();
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1,category);
+		stmt.setString(2,empId);
+		stmt.setInt(3,goodsPrice);
+		stmt.setInt(4,goodsAmount);
+		stmt.setString(5,goodsTitle);
+		stmt.setString(6,filename);
+		stmt.setString(7,goodsContent);
+		System.out.println(stmt +"stmt 확인 addAction");
+		
+		int row = stmt.executeUpdate();
+		
+		con.close();
+		return row;
+	}
+	 
 }

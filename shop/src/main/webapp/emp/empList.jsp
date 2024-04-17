@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="shop.dao.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*"%>
+<%@ page import="java.sql.*"%>
 
 <!-- Controller Layer -->
 <%
@@ -22,7 +23,7 @@
 	con = DriverManager.getConnection(
 		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	
-	//페이징
+	//페이징 -> 페이징은 jsp에서 구현
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -32,7 +33,6 @@
 	int startRow = (currentPage-1) * rowPerPage;
 	
 	//lastPage 구하기
-	
 	String pageSql = "select count(*) from emp";
 	
 	PreparedStatement pageStmt = null;
@@ -61,39 +61,10 @@
 %>
 <!-- model Layer -->
 <% 	
-	
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-	
-	//모델 값(특수한 형태의 자료구조 - RDBMS : mariadb) ->  
-	//API사용하여(JDBC API) 자료구조(ResultSet) 취득 -> 
-	
-	//일반화된 자료구조로 변경(ArrayList<HashMap>) ->모델 취득	
-	String sql ="select emp_id empId,emp_name empName, emp_job empJob,hire_date hireDate,active from emp order by hire_date desc limit ?,?";
-	stmt = con.prepareStatement(sql);
-	stmt.setInt(1, startRow);
-	stmt.setInt(2, rowPerPage);
-	rs = stmt.executeQuery();
-	
-	//일반화된 자료구조로 변경하기 - arraylist
-	 ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
-	
-	//ResultSet ->ArrayList<HashMap<String,Object>>
-	while(rs.next()){
-		HashMap<String,Object> m = new HashMap<String,Object>();
-		m.put("empId", rs.getString("empId"));   //--> 아이디 값이 들어감
-		m.put("empName",rs.getString("empName"));
-		m.put("empJob",rs.getString("empJob"));
-		m.put("hireDate",rs.getString("hireDate"));
-		m.put("active",rs.getString("active"));
-		list.add(m);
-		//rs행의 수만큼 리스트가 채워진다.
-	}
-	
-	//커넥션 닫아도 이미 리스트에 다 담았기때문에 자원해지 해도 됨.
-	
-	//JDBC API 사용이 끝났다면 디비자원을 닫아도 상관없다.
-	
+//empList출력	
+
+	 ArrayList<HashMap<String,Object>> list = EmpDAO.empList(startRow, rowPerPage);
+
 
 %>
 <!-- View Layer  : 모델 (ArrayList<HashMap<String,Object>>) 출력-->
