@@ -7,7 +7,7 @@
 
 %>
 <%
-	//emp 테이블에서 가입시 입력한 정보 가져와서 채우기
+	
 	
 	String id = request.getParameter("id");
 	//id 기준
@@ -42,7 +42,7 @@
 		cusUpdateInfo.add(cusInfo);
 		
 	}
-	
+	System.out.println(loginMember);
 
 %>
 <!DOCTYPE html>
@@ -59,7 +59,6 @@
 	
 	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<h4>회원정보 자세히 보기</h4>
-	<form method="post" action="/shop/customer/updateCustomerAction.jsp">
 	<table>
 	<%
 		for(HashMap c : cusUpdateInfo){
@@ -98,8 +97,9 @@
 	%>
 	
 	</table> 
-	<div style="margin:10px"><a href="./updateCustomerForm.jsp?id=<%=(String)loginMember.get("cusId")%>" >정보 수정하기</a></div>
+	<div style="margin:10px"><a href="./updateCustomerForm.jsp?id=<%=id%>" >정보 수정하기</a></div>
+	<div style="margin:10px"><a href="./editPwForm.jsp?id=<%=id%>" >비밀번호 변경</a></div>
 	&#127826
-	</form>
+	
 </body>
 </html>

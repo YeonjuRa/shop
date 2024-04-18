@@ -3,7 +3,6 @@
 <%@ page import="java.util.*" %>
 
 <%
-	//emp 테이블에서 가입시 입력한 정보 가져와서 채우기
 	
 	String id = request.getParameter("id");
 	//id 기준
@@ -27,7 +26,6 @@
 		
 		
 		cusInfo.put("id", rs.getString("mail"));
-		cusInfo.put("pw", rs.getString("pw"));
 		cusInfo.put("name", rs.getString("name"));
 		cusInfo.put("birth", rs.getString("birth"));
 		cusInfo.put("gender", rs.getString("gender"));
@@ -53,7 +51,7 @@
 <link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>s
+	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<form method="post" action="/shop/customer/updateCustomerAction.jsp">
 	<table>
 	<%
@@ -63,10 +61,7 @@
 			<td>ID (Mail) : </td>
 			<td><input type="text" name="id" value="<%=(String) c.get("id")%>" readonly></td>
 		</tr>
-		<tr>
-			<td>PW : </td>
-			<td><input type="text" name="pw" value="<%=(String) c.get("pw")%>"></td>
-		</tr>
+	
 		<tr>
 			<td>Name : </td>
 			<td><input type="text" name="name" value="<%=(String) c.get("name")%>"></td>

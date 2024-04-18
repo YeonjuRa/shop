@@ -90,12 +90,12 @@ public class CustomerDAO {
 		//비밀번호 수정
 		//호출 : editPwAction.jsp
 		//param: String mail, String 수정전 pw, String 수정 후 pw;
-		//return : int row (1성공, 2 실패);
+		//return : int row (1성공, 0 실패);
 		public static int updatePw(String mail, String oldPw, String newPw) throws Exception{
 			int row = 0;
 			Connection con = DBHelper.getConnection();
 			
-			String sql ="update customer set pw =? where mail=? and pw=?";
+			String sql ="update customer set pw=password(?) where mail=? and pw=password(?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, newPw);
 			stmt.setString(2, mail);
@@ -105,4 +105,25 @@ public class CustomerDAO {
 			con.close();
 			return row;
 		}
+		//회원정보 수정
+		//호출: editPwAction.jsp
+		//param: String name,String birth, gender, update_date,String mail
+		public static int updateCustomerAction (String name,String birth,String gender,String id) throws Exception{
+			int row = 0;
+			Connection con = DBHelper.getConnection();
+			String sql = "update customer set name=?,birth=?,gender=?, update_date=now() where mail=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1,name);
+			stmt.setString(2,birth);
+			stmt.setString(3,gender);
+			stmt.setString(4,id);
+			
+			row = stmt.executeUpdate();
+			
+			con.close();
+			return row;
+			
+		}
+		
 }

@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*"%>
+<%@ page import="shop.dao.*" %>
 
 <!-- Controller Layer -->
 <%
@@ -13,8 +14,6 @@
 	con = DriverManager.getConnection(
 		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	//페이징
-	
-		
 	
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null){
@@ -71,57 +70,15 @@
 <%
 	
 	
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null;
-	String sql1 = "select category, count(*) cnt from goods group by category order by category asc";
-	stmt1 = con.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
-	ArrayList<HashMap<String, Object>> categoryList =
-			new ArrayList<HashMap<String, Object>>();
-	while(rs1.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("category", rs1.getString("category"));
-		m.put("cnt", rs1.getInt("cnt"));
-		categoryList.add(m);
-	}
+
+	ArrayList<HashMap<String, Object>> categoryList = GoodsDAO.selectCategoryList();
+			
 
 	
 	
-	ResultSet rs2 = null;
-	String sql2 = null;
-	PreparedStatement stmt2 = null;
-	//전체상품출력과 선택목록 출력 분
-	if(category == ""){
-		sql2 = "select * from goods limit ?,?";
-		stmt2 = con.prepareStatement(sql2);
-		stmt2.setInt(1, startRow);
-		stmt2.setInt(2, rowPerPage);
-	}else{
-		sql2 = "select * from goods where category=? limit ?,?";
-		stmt2 = con.prepareStatement(sql2);
-		stmt2.setString(1,category);
-		stmt2.setInt(2, startRow);
-		stmt2.setInt(3, rowPerPage);
-	}
+	//Arraylist에 넣기 goodslist
+	ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.selectGoodsList(category, startRow, rowPerPage);
 	
-	
-	rs2 = stmt2.executeQuery();
-	
-	//Arraylist에 넣기
-	ArrayList<HashMap<String,Object>> goodsPerCategory = new ArrayList<HashMap<String,Object>>();
-	
-	while(rs2.next()){
-		HashMap<String,Object> gpc = new HashMap<String,Object>();
-	
-		gpc.put("goodsNo",rs2.getInt("goods_no"));
-		gpc.put("goodsTitle", rs2.getString("goods_title"));
-		gpc.put("fileName", rs2.getString("filename"));
-		gpc.put("goodsPrice", rs2.getInt("goods_price"));
-		
-		goodsPerCategory.add(gpc);
-		
-		
-	}
 	//디버깅
 	System.out.println(categoryList);
 	System.out.println(goodsPerCategory);
@@ -187,12 +144,12 @@
 					if(currentPage > 1){
 			
 				%>
-					<li ><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
 					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">&nbsp; < 이전 </a></li>
 				<%
 					}else{
 				%>	
-					<li ><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
 					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> &nbsp;< 이전 </a></li>
 					
 				<%	
@@ -227,7 +184,7 @@
 					if(floatBoxCnt%5 == 0){
 		%>	
 		
-			<a href="./goodsDetail.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left; clear:both;">
+			<a href="./goodsDetailForCustomer.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left; clear:both;">
 					
 					<img src="../upload/<%=(String)(gpc.get("fileName"))%>" width="200" height="200">
 					
@@ -238,7 +195,7 @@
 		<%			
 					}else{
 		%>			
-			<a href="./goodsDetail.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left;margin-left:10px;">
+			<a href="./goodsDetailForCustomer.jsp?goodsNo=<%=(Integer)(gpc.get("goodsNo"))%>" style="float:left;margin-left:10px;">
 					<img src="../upload/<%=(String)(gpc.get("fileName"))%>" width="200" height="200">
 					<div><%=(String)(gpc.get("goodsTitle"))%></div>
 					<div><%=(Integer)(gpc.get("goodsPrice"))%>원</div>

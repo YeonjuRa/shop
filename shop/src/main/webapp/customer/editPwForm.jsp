@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%
+	
+	String id = request.getParameter("id");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +17,12 @@
 </head>
 <body>
 	
-	<form method="post" action="shop/customer/editPwAction.jsp">
-		현재 비밀번호 : <input type="text" name="oldPw">
+	<form method="post" action="/shop/customer/editPwAction.jsp">
+		아이디 : <input name="id" type="text" value="<%=id%>" readonly>
+		현재 비밀번호 : <input type="password" name="oldPw">
 		새로운 비밀번호 : <input type="password" name="newPw">
-		<button>비밀번호 변경</button>
+		<button type="submit">비밀번호 변경</button>
 	</form>
+	<div><a href="/shop/customer/customerOne.jsp?id=<%=id%>">돌아가기</a></div>
 </body>
 </html>

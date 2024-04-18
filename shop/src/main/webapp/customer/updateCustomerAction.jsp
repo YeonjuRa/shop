@@ -3,7 +3,6 @@
 <%@ page import="shop.dao.*" %>
 
 
-<!-- update할 값 가져오기 -->
 <%
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
 
@@ -18,22 +17,9 @@
 	String birth = request.getParameter("birth");
 	String gender = request.getParameter("gender");
 	
+	int row = CustomerDAO.updateCustomerAction(name, birth, gender, id);
+
 	
-	
-	CustomerDAO.
-	PreparedStatement stmt = null;
-	
-	String sql = "update customer set name=?,birth=?,gender=?, update_date=now() where mail=?";
-	stmt = con.prepareStatement(sql);
-	
-	stmt.setString(1,name);
-	stmt.setString(2,birth);
-	stmt.setString(3,gender);
-	stmt.setString(4,id);
-	
-	System.out.println(stmt +"stmt 확인 --> updateCustomerAction");
-	
-	int row = stmt.executeUpdate();
 	if(row != 0){ 
 		System.out.println("회원 정보 업데이트 완료");
 		response.sendRedirect("/shop/customer/customerOne.jsp?id="+id);
