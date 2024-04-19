@@ -3,18 +3,20 @@
 <%@ page import="java.util.*" %>
 <%
 	int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
+	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
 	
-
-	//인정분기 : 세션변수 이름 - loginEmp
-	if(session.getAttribute("loginEmp") == null){
-		response.sendRedirect("/shop/emp/empLoginForm.jsp");
-		return;
-	}
+	
 	
 	
 	//리스트에 넣기
 	ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
-		
+	/* 
+	int goodsAmount = 0;
+	if(request.getParameter("goodsAmount") == null || request.getParameter("goodsAmount").equals("null")){
+		goodsAmount = 0;
+	}
+	System.out.println(goodsAmount); */
+	
 
 %>
 <!DOCTYPE html>
@@ -34,7 +36,7 @@
 	<div class="row">
 	<!--  서브메뉴 -->
 	<div class="col-2 text-center">
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 
 	
 	</div>
@@ -48,13 +50,16 @@
 		%>	
 		<div><img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="200" height="200"></div>
 		<div>카테고리 : <%=(String)(gpc.get("category"))%></div>
-		<div>등록 아이디 : <%=(String)(gpc.get("empId")) %></div>
 		<div>상품명 : <%=(String)(gpc.get("goodsTitle")) %></div>
 		
 		<div>설명: <%=(String)(gpc.get("goodsContent")) %></div>
 		<div>가격: <%=(Integer)(gpc.get("goodsPrice")) %></div>
-		<div>수량 :<%=(Integer)(gpc.get("goodsAmount")) %></div>	
-		<div>등록일: <%=(String)(gpc.get("createDate")) %></div>	
+		
+		<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
+		수량: <input type="number" name="totalAmount">
+		<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
+		<button>주문하기</button>
+		</form>
 		<%
 		
 		
@@ -65,11 +70,8 @@
 	
 	<div>
 	<!-- 주문하기 -->
-	<form>
 	
-	</form>
-	<a href="*">주문하기</a>
-	<a href=>삭제하기</a>
+	<div><a href="/shop/customer/ordersListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 주문 목록으로 이동하기</a></div>
 	</div>
 	
 	</div>

@@ -184,5 +184,6 @@ public class GoodsDAO {
 		con.close();
 		return row;
 	}
+	
 	 
 }
