@@ -125,5 +125,44 @@ public class CustomerDAO {
 			return row;
 			
 		}
+		// 관리자 페이지 전체 회원정보(pw제외)
+		// 호출 : /admin/customerList.jsp
+		// param : void
+		// return : Customer배열(리스트) -> ArrayList<HashMap<String, Object>>
+		public static ArrayList<HashMap<String, Object>> selectCustomerListByPage(
+				int startRow, int rowPerPage) throws Exception {
+		
+			
+			ArrayList<HashMap<String, Object>> list =
+					new ArrayList<HashMap<String, Object>>();
+			
+			Connection con = DBHelper.getConnection();
+			String sql = "select "
+					+ "mail,name,birth,gender,update_date updateDate,create_date createDate "
+					+ " from customer"
+					+ " order by mail"
+					+ " limit ?,?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, startRow);
+			stmt.setInt(2, rowPerPage);
+			ResultSet rs = stmt.executeQuery();
+			
+			// JDBC Resulst(자바에서 일반적이지 않은 자료구조) 
+			//  -> (자바에서 평이한 자료구조) Collections API 타입 -> List, Set, Map 
+			while(rs.next()) {
+				HashMap<String, Object> m = new HashMap<String, Object>();
+				m.put("mail", rs.getString("mail"));
+				m.put("name", rs.getString("name"));
+				m.put("birth", rs.getString("birth"));
+				m.put("gender", rs.getString("gender"));
+				m.put("createDate", rs.getString("createDate"));
+				list.add(m);
+			}
+			
+			con.close();
+			
+			return list;
+		}
+	
 		
 }

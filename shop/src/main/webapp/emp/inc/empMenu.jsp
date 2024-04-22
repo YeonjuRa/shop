@@ -17,13 +17,13 @@
 
 <header>
 		<nav class="navbar navbar-expand-lg navbar-white bg-white">
-  <a class="navbar-brand" style="padding-left:5%;"href="#">Storemade</a>
+  <a class="navbar-brand" style="padding-left:5%;"href="/shop/customer/mainCustomer.jsp">Storemade</a>
   
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+        <a class="nav-link" href="./empList.jsp">Home <span class="sr-only"></span></a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="./goodsList.jsp">상품 관리</a>
@@ -35,7 +35,10 @@
         <a class="nav-link" href="./categoryList.jsp">카테고리 관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Other</a>
+        <a class="nav-link" href="./OrdersListForEmp.jsp">주문 관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./customerListForEmp.jsp">회원 관리</a>
       </li>
       
     </ul>

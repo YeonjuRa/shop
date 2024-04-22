@@ -5,8 +5,7 @@
 	int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
 	
-	
-	
+
 	
 	//리스트에 넣기
 	ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
@@ -24,19 +23,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+<!-- Latest compiled JavaScript -->	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link href="./stylesheet.css" rel="stylesheet">
+<link href="../emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 <div class="container-fluid">	
 	<div class="row">
 	<!--  서브메뉴 -->
 	<div class="col-2 text-center">
-	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+	
 
 	
 	</div>

@@ -3,6 +3,10 @@
 <%@ page import="java.util.*" %>
 
 <%
+	if(session.getAttribute("loginCustomer") == null){
+		response.sendRedirect("/shop/customer/loginCustomer.jsp");
+		return;
+	}
 	
 	String id = request.getParameter("id");
 	//id 기준

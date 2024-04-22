@@ -3,17 +3,10 @@
 <%@ page import ="shop.dao.*" %>
 <%@ page import ="java.util.*" %>
 <%
-	if(session.getAttribute("loginCustomer") == null){
-		response.sendRedirect("/shop/customer/loginCustomer.jsp");
-		return;
-	}
-	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
-	String mail = (String)loginMember.get("mail");
 
-	ArrayList<HashMap<String,Object>> selectOrderList = OrderDAO.selectOrdersList(mail);
+	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginEmp"));
 	
-	
-
+	ArrayList<HashMap<String,Object>> selectOrderList = OrderDAO.selectOrdersListAll();
 
 %>
 <!DOCTYPE html>
@@ -27,17 +20,18 @@
 <link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+
+<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+<h4 class="text-center">주문 상세보기</h4>
 	<table class="table table-hover text-center">
 		<tr>
 			<th>ORDERS NO.</th>
 			<th>GOODS TITLE</th>
 			<th>TOTAL AMOUNT</th>
 			<th>TOTAL PRICE</th>
-			<th>STATE</th>
 			<th>주문 일시</th>
 			<th>상세보기</th>
-			<th>후기</th>
+			<th>STATE</th>
 				
 		</tr>
 		
@@ -51,31 +45,20 @@
 				<td><%=(String)(m.get("goodsTitle"))%></td>
 				<td><%=(Integer)(m.get("totalAmount"))%></td>
 				<td><%=(Integer)(m.get("totalPrice"))%></td>
-				<td><%=(String)(m.get("state"))%></td>
 				<td><%=(String)(m.get("createDate"))%></td>
 				<td><a href=#>주문 상세보기</a></td>
-				<%
-				int ordersNo = (Integer)(m.get("ordersNo"));
-				boolean checkComment = CommentDAO.checkCommentAction(ordersNo);
-					if(checkComment == true){
-				%>
-						<td>후기 작성 완료</td>
-				<%
-					}else{
-						
-					
-					if(((String)(m.get("state"))).equals("배송 완료")){
-				%>
-						<td><a href="/shop/customer/insertCommentForm.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">
-						후기 작성하기</a></td>
-				<%
-					}else{
-				%>
-						<td>후기 작성 불가</td>
-				<%
-					}
-				}
-				%>
+				<td>
+				<form method="post" action="/shop/emp/updateStateAction.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">
+				
+				<select name="state">
+					<option value="<%=(String)(m.get("state"))%>"><%=(String)(m.get("state"))%></option>
+					<option value="결제 완료">결제 완료</option>
+					<option value="배송 중">배송 중</option>
+					<option value="배송 완료">배송 완료</option>
+				</select>
+				<button type="submit">상태 변경하기</button>
+				
+				</form>
 				
 			</tr>
 			<% 

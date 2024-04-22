@@ -53,7 +53,7 @@ public class OrderDAO {
 		return list;
 	}
 	//관리자 전체주문을 확인 ->페이징
-	public static ArrayList<HashMap<String,Object>> selectOrdersListAll (String mail)throws Exception{
+	public static ArrayList<HashMap<String,Object>> selectOrdersListAll ()throws Exception{
 		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 		Connection con = DBHelper.getConnection();
 		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle,"
@@ -62,11 +62,43 @@ public class OrderDAO {
 				+ " order by o.orders_no DESC";
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
 		
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			
+			m.put("ordersNo",rs.getInt("ordersNo"));
+			m.put("goodsNo", rs.getInt("goodsNo"));
+			m.put("goodsTitle", rs.getString("goodsTitle"));
+			m.put("totalAmount", rs.getInt("totalAmount"));
+			m.put("totalPrice", rs.getInt("totalPrice"));
+			m.put("state", rs.getString("state"));
+			m.put("createDate", rs.getString("createDate"));
+			
+			list.add(m);
+		}
 		
 		con.close();
-		return list;
+		return list;	
 	}
+	public static int updateStateAction (String state, int ordersNo) throws Exception {
+		Connection con = DBHelper.getConnection();
+		
+		String sql = "update orders set state = ? where orders_no =?";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1,state);
+		stmt.setInt(2,ordersNo);
+	
+		
+		int row = stmt.executeUpdate();
+		
+		con.close();
+		return row;
+	}
+	
+		
+
 	
 }
 	

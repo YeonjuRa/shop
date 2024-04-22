@@ -3,6 +3,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="shop.dao.*" %>
 <%
+
+	if(session.getAttribute("loginCustomer") == null){
+		response.sendRedirect("/shop/customer/loginCustomer.jsp");
+		return;
+	}
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
    
 

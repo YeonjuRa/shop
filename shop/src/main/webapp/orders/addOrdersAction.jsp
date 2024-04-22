@@ -18,6 +18,8 @@
 	
 	if(row != 0){
 		System.out.println("상품 주문 완료");
+		GoodsDAO.updateGoodsAmount(totalAmount, goodsNo);
+		response.sendRedirect("/shop/customer/ordersListForCustomer.jsp?id="+mail);
 	}else{
 		System.out.println("상품 주문 실패");
 	}
