@@ -53,7 +53,7 @@
 				<td><%=(Integer)(m.get("totalPrice"))%></td>
 				<td><%=(String)(m.get("state"))%></td>
 				<td><%=(String)(m.get("createDate"))%></td>
-				<td><a href=#>주문 상세보기</a></td>
+				<td><a href="/shop/customer/orderOne.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">주문 상세보기</a></td>
 				<%
 				int ordersNo = (Integer)(m.get("ordersNo"));
 				boolean checkComment = CommentDAO.checkCommentAction(ordersNo);

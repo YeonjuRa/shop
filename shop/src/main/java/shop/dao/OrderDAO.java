@@ -96,10 +96,39 @@ public class OrderDAO {
 		con.close();
 		return row;
 	}
-	
+	public static ArrayList<HashMap<String,Object>> selectOrderOne (int ordersNo)throws Exception{
+		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+		Connection con = DBHelper.getConnection();
+		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, g.filename filename, "
+				+ " o.total_amount totalAmount, o.total_price totalPrice,o.state state, o.create_date createDate "
+				+ "from orders o inner join goods g on o.goods_no = g.goods_no "
+				+ "where o.orders_no =?";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,ordersNo);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			
+			m.put("ordersNo",rs.getInt("ordersNo"));
+			m.put("goodsNo", rs.getInt("goodsNo"));
+			m.put("goodsTitle", rs.getString("goodsTitle"));
+			m.put("filename", rs.getString("filename"));
+			m.put("totalAmount", rs.getInt("totalAmount"));
+			m.put("totalPrice", rs.getInt("totalPrice"));
+			m.put("state", rs.getString("state"));
+			m.put("createDate", rs.getString("createDate"));
+			
+			list.add(m);
+		}
+		
+		con.close();
+		return list;
 		
 
 	
+}
 }
 	
 
