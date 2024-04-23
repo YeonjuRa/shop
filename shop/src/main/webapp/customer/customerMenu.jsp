@@ -68,7 +68,7 @@
         <a class="nav-link" href="./customerGoodsList.jsp?category=상의">shirts</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./customerGoodsList.jsp?category=기프트카드">gift card</a>
+        <a class="nav-link" href="./customerGoodsList.jsp?category=기프트 카드">gift card</a>
       </li>
       
     </ul>

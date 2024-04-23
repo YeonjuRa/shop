@@ -196,5 +196,16 @@ public class GoodsDAO {
 		con.close();
 		return row;
 	}
-	 
+	 public static int cancelGoodsAmount(int totalAmount,int goodsNo) throws Exception{
+		 int row = 0;
+		 String sql= "update goods set goods_amount = goods_amount + ? where goods_no =?";
+		 Connection con = DBHelper.getConnection();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, totalAmount);
+			stmt.setInt(2, goodsNo);
+			row = stmt.executeUpdate();
+			
+			con.close();
+			return row;
+	 }
 }

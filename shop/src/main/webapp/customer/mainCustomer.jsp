@@ -17,7 +17,8 @@
 <link href="/shop/emp/stylesheet.css" rel="stylesheet">
 <style>
 
-/* 슬라이더 애니메시션 참고 - https://velog.io/@wswy17/CSS-animation-%ED%99%9C%EC%9A%A9%ED%95%B4-slider-%EB%A7%8C%EB%93%A4%EA%B8%B0 */
+/* 슬라이더 애니메시션 참고 - 
+https://velog.io/@wswy17/CSS-animation-%ED%99%9C%EC%9A%A9%ED%95%B4-slider-%EB%A7%8C%EB%93%A4%EA%B8%B0 */
 	.slider {
   overflow: hidden;
   width: 100vw;
@@ -37,7 +38,7 @@
 }
 
 .slider .slide:nth-child(1) {
-  background-image: url('./main1.webp');
+  background-image: url('./main.png');
  
   animation-delay: -0;
 }

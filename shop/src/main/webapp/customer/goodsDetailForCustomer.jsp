@@ -55,13 +55,27 @@
 		<div>설명: <%=(String)(gpc.get("goodsContent")) %></div>
 		<div>가격: <%=(Integer)(gpc.get("goodsPrice")) %></div>
 		
-		<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
-		수량: <input type="number" name="totalAmount">
-		<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
-		<button>주문하기</button>
-		</form>
 		<%
+			if(session.getAttribute("loginCustomer") == null){
+		%>
+			<form method="post" action="/shop/customer/loginCustomer.jsp">
+			수량: <input type="number" name="totalAmount">
+			<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
+			<button>주문하기</button>
+		</form>
+		<% 
+			}else{
+		%>		
+			<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
+			수량: <input type="number" name="totalAmount">
+			<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
+			<button>주문하기</button>
+		</form>
 		
+		
+		
+		<%
+			}
 		
 		}
 		
@@ -69,9 +83,8 @@
 
 	
 	<div>
-	<!-- 주문하기 -->
 	
-	<div><a href="/shop/customer/ordersListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 주문 목록으로 이동하기</a></div>
+	
 	</div>
 	
 	</div>

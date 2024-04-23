@@ -125,10 +125,26 @@ public class OrderDAO {
 		
 		con.close();
 		return list;
+	}
 		
+		public static int cancelOrderActoin (int ordersNo) throws Exception {
+			Connection con = DBHelper.getConnection();
+			
+			String sql = "update orders set state='취소 완료' where orders_no =? and state ='결제 완료'";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1,ordersNo);
+			
+		
+			
+			int row = stmt.executeUpdate();
+			
+			con.close();
+			return row;
+		}
+	
 
 	
-}
 }
 	
 
