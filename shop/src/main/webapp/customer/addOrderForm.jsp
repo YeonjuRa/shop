@@ -30,6 +30,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 <h2>배송 정보 입력 폼</h2>
 	<form method="post" action="/shop/orders/addOrdersAction.jsp">
 		<input type="text" name="mail" value="<%=mail%>" readonly>

@@ -124,7 +124,7 @@
 					}
 					if(currentPage<lastPage){
 				%>
-					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp;| 다음 > </a></li>
+					<li><a href="./goodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp;&nbsp; 다음 > </a></li>
 					<li><a href="./goodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
 				<%
 					}else{

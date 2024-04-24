@@ -26,6 +26,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 <form method="post" action="/shop/customer/insertCommentAction.jsp">
 	<table>
 	
@@ -60,5 +61,6 @@
 	</table>
 	<button type="submit">후기 작성하기!</button>
 	</form>
+		<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

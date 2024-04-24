@@ -7,10 +7,6 @@
 		return;
 	}
 
-	
-
-
-
 
 
 %>
@@ -19,35 +15,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+<link href="/shop/emp/stylesheet.css" rel="stylesheet">
 <style>
-	@font-face {
-    font-family: 'Ownglyph_Dailyokja-Rg';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/Ownglyph_Dailyokja-Rg.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-	}
-	*{
-		font-family:'Ownglyph_Dailyokja-Rg';
-	}
-	.container{
-		display: flex;
-  		justify-content: center;
-  		flex-direction:row;
-  		align-items: center;
-  
-  	
-	}
+
+	
 	.inner{
 	position: absolute;
  	top: 50%;
  	left: 50%;
   	transform: translate(-50%,-50%); 
-  	background-color: #e8ddcb; 
-  	width:400px;
+  	background-color: #ffffff; 
+  	width:700px;
   	height:300px;
   	border-radius:10px;
   	border: 2px dashed black;
 	text-align:center;
+	
 	}
 	.btnn{
 	background-color:#a49bc6;
@@ -64,15 +47,19 @@
 		border-radius:4px;
 	}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
-<body style="background-color:#f8faca;">
+<body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	
 	
-	<div class="container">
 	<div class="inner">
 	<h2 style="text-decoration:underline;">STOREMADE</h2>
 
-	<h3 style="font-size:23px;">회원 로그인</h3>
+	<h3 style="font-size:21px;"><b>회원 로그인</b></h3>
 	<div style="color: #a58680; font-size:21px">are you ready for this spring season?</div>
 
 	<div style="margin-top:10px;">
@@ -93,7 +80,7 @@
 	<div><a href="./registerCustomerForm.jsp">회원가입</a></div>
 	</div>
 	</div>
-	</div>
+
 
 	
 	

@@ -115,7 +115,7 @@
 	<div class="container-fluid">
 	<div class="row">
 	<!--  서브메뉴 -->
-	<div class="col-2 text-center mt-2 " style="font-size:17px;background-color:#ffffff;border-radius:10px;">
+	<div class="col-2 text-center mt-2 " style="font-size:17px;background-color:#EDD39B;border-radius:10px;">
 		<br>
 		<a href="/shop/customer/customerGoodsList.jsp"><b>전체</b></a>
 		<hr>
@@ -165,7 +165,7 @@
 					}
 					if(currentPage<lastPage){
 				%>
-					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp;| 다음 > </a></li>
+					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp; 다음 > </a></li>
 					<li><a href="./customerGoodsList.jsp?currentPage=<%=lastPage%>&category=<%=category%>"> &nbsp;마지막 페이지 >></a></li>
 				<%
 					}else{
@@ -239,7 +239,7 @@
 	</div>
 	</div>
 	
-
+<jsp:include page="/customer/footer.jsp"></jsp:include>
 	
 			
 </body>

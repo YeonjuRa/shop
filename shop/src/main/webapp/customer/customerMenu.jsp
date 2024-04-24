@@ -10,16 +10,58 @@
 	header{
 	font-size:20px;
 	
-	border-bottom:1px solid;
+	
 	}
 	ul{display: table;margin-left: auto; margin-right: auto;}
-	
+	li{
+		padding-left:40px;
+	}
+	.headermenu{
+	background-color:#EDD39B;
+	height:60px;
+	text-align:right;
+	border-style:none;
+	padding-right:30px;
+	padding-top:20px;
+	}
 </style>
 
 <header>
+	
+<%
+	if(session.getAttribute("loginCustomer") == null){
+%>
+	<div style="background-color:#EDD39B;height:60px;text-align:right;border-style:none;">
+		<div style="margin-right:50px;padding-top:20px">
+		<a href="#">shopping cart | </a>
+  		<a href="./loginCustomer.jsp">login</a>
+ 		</div>
+	</div>
+
+
+
+<%
+		
+	}else{
+		
+%>
+	<div class="headermenu">
+	<a href="./customerOne.jsp?id=<%=(String)loginMember.get("mail")%>"><%=(String)loginMember.get("name")%></a>
+  		님 | 
+  	<a href="/shop/customer/ordersListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 주문 |</a>
+  	<a href="/shop/customer/commentListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>"> 내 후기 </a>
+  
+    	
+    	</div>
+
+
+
+<%
+	}
+%>
 	<div class="text-center bg-white pt-3"><a href="./mainCustomer.jsp">&#127826<br>STOREMADE</a></div>
 	
-		<%
+		<%-- <%
   		if(session.getAttribute("loginCustomer") == null){
   	%>
   		<div class="text-end pe-5 bg-white">
@@ -42,13 +84,9 @@
   	
   	<% 
   		}
-  	%>
-  	
-  
-  	
+  	%> --%>
 
-
-		<nav class="navbar navbar-expand-lg navbar-white" style="background-color:#e2c1f5">
+		<nav class="navbar navbar-expand-lg navbar-white">
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

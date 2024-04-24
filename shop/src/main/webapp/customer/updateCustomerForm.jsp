@@ -99,5 +99,6 @@
 	<div style="margin:10px"><button type="submit" class="btnn" >정보 수정하기</button></div>
 	&#127826
 	</form>
+		<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

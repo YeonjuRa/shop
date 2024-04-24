@@ -58,8 +58,9 @@
 <body>
 	
 	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
-	<h4>회원정보 자세히 보기</h4>
-	<table>
+	<div>
+	<h4 style="text-align:center">회원정보 자세히 보기</h4>
+	<table style="margin: auto;padding:auto;">
 	<%
 		for(HashMap c : cusUpdateInfo){
 	%>
@@ -97,9 +98,11 @@
 	%>
 	
 	</table> 
+	
 	<div style="margin:10px"><a href="./updateCustomerForm.jsp?id=<%=id%>" >정보 수정하기</a></div>
 	<div style="margin:10px"><a href="./editPwForm.jsp?id=<%=id%>" >비밀번호 변경</a></div>
 	&#127826
-	
+	</div>
+		<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -208,4 +208,26 @@ public class GoodsDAO {
 			con.close();
 			return row;
 	 }
+	 //메인 페이지에만 출력될 상품 리스트 
+	 public static ArrayList<HashMap<String, Object>> NewProductsList () throws Exception{
+	 ArrayList<HashMap<String, Object>> NewProductsList =
+				new ArrayList<HashMap<String, Object>>();
+		//디비연결
+		Connection con = DBHelper.getConnection();
+		String sql = "select goods_title,filename from goods order by create_date desc limit 0,5";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+	
+		
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("goodsTitle", rs.getString("goods_title"));
+			m.put("fileName", rs.getString("filename"));
+			NewProductsList.add(m);
+		}
+		con.close();
+		return NewProductsList;
+	}
 }
+

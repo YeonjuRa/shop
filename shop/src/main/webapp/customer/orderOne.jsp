@@ -68,6 +68,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<table>
 	<%
 		for(HashMap<String,Object> m : orderOne){

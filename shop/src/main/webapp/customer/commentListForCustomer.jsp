@@ -140,5 +140,6 @@ width: auto;height: 20px;}
 			</tr>
 			
 			</table>
+				<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

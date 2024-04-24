@@ -48,13 +48,16 @@
 		for(HashMap gpc : goodsPerCategory){
 			
 		%>	
-		<div><img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="200" height="200"></div>
-		<div>카테고리 : <%=(String)(gpc.get("category"))%></div>
-		<div>상품명 : <%=(String)(gpc.get("goodsTitle")) %></div>
+		<div style="width:50%;">
+		<img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="50%" height="400">
+		<div style="width:50%;float:right;text-align:center">
+		 Category <%=(String)(gpc.get("category"))%>
+		<br>
+		<%=(String)(gpc.get("goodsTitle")) %>
+		<br>
+		<%=(Integer)(gpc.get("goodsPrice")) %>원
 		
-		<div>설명: <%=(String)(gpc.get("goodsContent")) %></div>
-		<div>가격: <%=(Integer)(gpc.get("goodsPrice")) %></div>
-		
+		<br>
 		<%
 			if(session.getAttribute("loginCustomer") == null){
 		%>
@@ -72,28 +75,33 @@
 			<button>주문하기</button>
 		</form>
 		
-		
+		</div>
 		
 		<%
 			}
+		%>
 		
+		</div>
+		<div style="width:50%">
+		<div style="width:50%"><b>About Product</b> <br><%=(String)(gpc.get("goodsContent")) %></div>
+		</div>
+		
+		<%
 		}
 		
 		%>
 
 	
-	<div>
 	
 	
 	</div>
 	
 	</div>
 	</div>
-	</div>
 	
 	
 	
 	
-	
+	<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

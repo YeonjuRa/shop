@@ -28,6 +28,9 @@
 </head>
 <body>
 <jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+<br>
+<h3 style="text-align:center;">MY ORDERS</h3>
+<br>
 	<table class="table table-hover text-center">
 		<tr>
 			<th>ORDERS NO.</th>
@@ -88,5 +91,6 @@
 		
 		
 	</table>
+	<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>
