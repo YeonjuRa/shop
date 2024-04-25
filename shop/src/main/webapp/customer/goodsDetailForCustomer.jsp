@@ -69,10 +69,12 @@
 		<% 
 			}else{
 		%>		
-			<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
+			<form method="post">
 			수량: <input type="number" name="totalAmount">
 			<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
-			<button>주문하기</button>
+			<button type="submit" formaction="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">장바구니에 추가</button>
+			<button type="submit" formaction="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">주문하기</button>
+			<!-- form태그 하나에 두개의 button넣기 1) html 5에서만 제공하는 formaction으로 분기 2) value 값으로 action페이지에서 분기  -->
 		</form>
 		
 		</div>

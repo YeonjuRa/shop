@@ -7,7 +7,7 @@
 
 %>
 <%
-	
+	//회원정보 상세보기 페이지
 	
 	String id = request.getParameter("id");
 	//id 기준
