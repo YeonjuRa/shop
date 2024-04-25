@@ -33,7 +33,7 @@
 %>
 	<div style="background-color:#EDD39B;height:60px;text-align:right;border-style:none;">
 		<div style="margin-right:50px;padding-top:20px">
-		<a href="#">shopping cart | </a>
+		<a href="/shop/customer/cart/cartList.jsp">shopping cart | </a>
   		<a href="./loginCustomer.jsp">login</a>
  		</div>
 	</div>
@@ -61,30 +61,7 @@
 %>
 	<div class="text-center bg-white pt-3"><a href="./mainCustomer.jsp">&#127826<br>STOREMADE</a></div>
 	
-		<%-- <%
-  		if(session.getAttribute("loginCustomer") == null){
-  	%>
-  		<div class="text-end pe-5 bg-white">
-  		<a href="./loginCustomer.jsp">로그인 |</a>
-  		<a href="./registerCustomerForm.jsp"> 회원가입</a>
-  		<br>
-  		<a href="../emp/empLoginForm.jsp">관리자 로그인 |</a>
-  		<a href="../emp/addEmpForm.jsp"> 사원 추가</a>
-  		</div>
-  		
-  	<%
-  		}else{
-  	%>		
-  		<div class="text-end bg-white"><a href="./customerOne.jsp?id=<%=(String)loginMember.get("mail")%>"><%=(String)loginMember.get("name")%></a>
-  		님 안녕하세요 :)
-  		<div><a href="/shop/customer/ordersListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 주문 목록으로 이동하기</a></div>
-  		<div><a href="/shop/customer/commentListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 후기 목록으로 이동하기</a></div>
-    	<a class=" float-right ms-5 me-5" href="./logoutCustomer.jsp"><img src="../emp/logoutIcon.png" style="width:30px; height:30px; border:0px;">
-    	</a></div>
-  	
-  	<% 
-  		}
-  	%> --%>
+		
 
 		<nav class="navbar navbar-expand-lg navbar-white">
 

@@ -57,7 +57,7 @@
 <body>
 	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<form method="post" action="/shop/customer/updateCustomerAction.jsp">
-	<table>
+	<table class="table table-hover">
 	<%
 		for(HashMap c : cusUpdateInfo){
 	%>

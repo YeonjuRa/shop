@@ -24,11 +24,15 @@
 .rate input:checked ~ .rate label:hover ~ label,  
 .rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  } 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 <form method="post" action="/shop/customer/insertCommentAction.jsp">
-	<table>
+	<table class="table table-hover">
 	
 		<tr>
 			<td>주문 번호</td>

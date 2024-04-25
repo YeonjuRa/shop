@@ -69,7 +69,7 @@
 	<div class="container-fluid">
 	<div class="row">
 	<!--  서브메뉴 -->
-	<div class="col-2 text-center mt-2 " style="font-size:20px;background-color:#d9c1e3;border-radius:10px;">
+	<div class="col-2 text-center mt-2 " style="font-size:20px;background-color:#EDD39B;border-radius:10px;">
 		<br>
 		<a href="/shop/emp/goodsList.jsp"><b>전체</b></a>
 		<hr>

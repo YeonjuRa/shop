@@ -22,7 +22,7 @@
 <body>
 
 <jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-<h4 class="text-center">주문 상세보기</h4>
+<h4 class="text-center mt-5">주문 상세보기</h4>
 	<table class="table table-hover text-center">
 		<tr>
 			<th>ORDERS NO.</th>
@@ -44,7 +44,7 @@
 				<td><%=(Integer)(m.get("ordersNo"))%></td>
 				<td><%=(String)(m.get("goodsTitle"))%></td>
 				<td><%=(Integer)(m.get("totalAmount"))%></td>
-				<td><%=(Integer)(m.get("totalPrice"))%></td>
+				<td><%=(Integer)(m.get("totalPrice"))%>원</td>
 				<td><%=(String)(m.get("createDate"))%></td>
 				<td><a href=#>주문 상세보기</a></td>
 				<td>

@@ -57,34 +57,29 @@
 	
 	
 	<div class="inner">
-	<h2 style="text-decoration:underline;">STOREMADE</h2>
+	
 
-	<h3 style="font-size:21px;"><b>회원 로그인</b></h3>
+	<h3 style="font-size:21px;padding-top:20px;"><b>회원 로그인</b></h3>
 	<div style="color: #a58680; font-size:21px">are you ready for this spring season?</div>
 
 	<div style="margin-top:10px;">
 	<form method="post" action="/shop/customer/loginCustomerAction.jsp">
 	<table>
 	<tr>
-		<td>ID(MAIL) : </td>
+		<td>ID(MAIL)  </td>
 		<td><input type="email" name="mail"></td>
 	</tr>
 	<tr>
-		<td>PW :</td>
+		<td>PW </td>
 		<td><input type="password" name="pw"></td>
 	</tr>
 	</table> 
 	<div style="margin:10px"><button type="submit" class="btnn" >로그인</button></div>
 	&#127826
 	</form>
-	<div><a href="./registerCustomerForm.jsp">회원가입</a></div>
+	<div style="font-size:18px"><a href="./registerCustomerForm.jsp">회원가입</a>  |  <a href="/shop/emp/empLoginForm.jsp">사원 로그인</a></div>
 	</div>
 	</div>
-
-
-	
-	
-
 
 </body>
 </html>

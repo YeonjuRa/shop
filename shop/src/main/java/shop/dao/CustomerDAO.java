@@ -114,6 +114,7 @@ public class CustomerDAO {
 			String sql = "update customer set name=?,birth=?,gender=?, update_date=now() where mail=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
+			System.out.println(stmt + "<--editPwAction.jsp");
 			stmt.setString(1,name);
 			stmt.setString(2,birth);
 			stmt.setString(3,gender);

@@ -66,10 +66,16 @@
     display: block;
 }
 </style>
+<!-- Latest compiled JavaScript -->	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="../emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/customer/customerMenu.jsp"></jsp:include>
-	<table>
+	<table class="table table-hover">
 	<%
 		for(HashMap<String,Object> m : orderOne){
 	%>
@@ -95,7 +101,7 @@
 		</tr>
 		<tr>
 			<td>총 구매 금액  </td>
-			<td><%=m.get("totalPrice") %></td>
+			<td><%=m.get("totalPrice") %>원</td>
 		</tr>
 		<tr>
 			<td>주문 상황   </td>
@@ -123,8 +129,8 @@
 		           해당 주문을 취소 하시겠습니까?
 		           (취소하신 상품은 다시 되돌릴 수 없습니다.)
 		           <div>주문번호: <%=m.get("ordersNo") %></div>
-		           <div>환불 예정 금액: <%=m.get("totalPrice") %></div>
-		           <a href="/shop/orders/cancelOrdersAction.jsp?ordersNo=<%=ordersNo%>">주문 취소하기</a>
+		           <div>환불 예정 금액: <%=m.get("totalPrice") %>원</div>
+		           <a href="/shop/orders/cancelOrdersAction.jsp?ordersNo=<%=ordersNo%>" style="background-color:#BFB4EA; padding:5px;">주문 취소하기</a>
 		        </div>
 		        
 		    </div>

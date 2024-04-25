@@ -16,13 +16,14 @@
 <link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-	
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<form method="post" action="/shop/customer/editPwAction.jsp">
 		아이디 : <input name="id" type="text" value="<%=id%>" readonly>
 		현재 비밀번호 : <input type="password" name="oldPw">
 		새로운 비밀번호 : <input type="password" name="newPw">
 		<button type="submit">비밀번호 변경</button>
 	</form>
-	<div><a href="/shop/customer/customerOne.jsp?id=<%=id%>">돌아가기</a></div>
+	<div><a href="/shop/customer/customerOne.jsp?id=<%=id%>" style="background-color:#BFB4EA; padding:5px;margin-left:5px;">돌아가기</a></div>
+		<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

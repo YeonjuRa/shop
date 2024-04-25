@@ -15,6 +15,7 @@
 		goodsAmount = 0;
 	}
 	System.out.println(goodsAmount); */
+	ArrayList<HashMap<String,Object>> selectCommentPerGoods = CommentDAO.selectCommentPerGoods(goodsNo);
 	
 
 %>
@@ -23,6 +24,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+
+<style>
+.rate{
+width: 121px;height: 20px;position: relative;}
+
+.rate span{
+position: absolute;
+background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);
+width: auto;height: 20px;}
+
+</style>
 <!-- Latest compiled JavaScript -->	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -30,32 +42,29 @@
 
 <link href="../emp/stylesheet.css" rel="stylesheet">
 </head>
+
 <body>
 <jsp:include page="/customer/customerMenu.jsp"></jsp:include>
-<div class="container-fluid">	
-	<div class="row">
-	<!--  서브메뉴 -->
-	<div class="col-2 text-center">
-	
 
-	
-	</div>
-	
-	<div class="col-10">
-		<h1>상품 상세 보기</h1>
-	
+<div class="container-fluid">	
+		<div class="d-flex justify-content-center">
+		
 		<%
 		for(HashMap gpc : goodsPerCategory){
 			
 		%>	
-		<div style="width:50%;">
-		<img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="50%" height="400">
-		<div style="width:50%;float:right;text-align:center">
-		 Category <%=(String)(gpc.get("category"))%>
+		<div style="width:80%;">
+		 <b>> Category : <%=(String)(gpc.get("category"))%></b><br><br>
+		<img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="35%" height="500">
+		<div style="width:50%;height:500px;float:right;text-align:center;font-size:20px;background-color:#EDD39B;padding:10px;border-radius:5px;">
+		
 		<br>
-		<%=(String)(gpc.get("goodsTitle")) %>
+		<span style="font-size:30px">==<b><%=(String)(gpc.get("goodsTitle"))%></b>==</span>
 		<br>
-		<%=(Integer)(gpc.get("goodsPrice")) %>원
+		<b> #About Product </b> <br>
+		<%=(String)(gpc.get("goodsContent")) %>
+		<br>
+		<b><%=(Integer)(gpc.get("goodsPrice")) %>원</b>
 		
 		<br>
 		<%
@@ -63,18 +72,17 @@
 		%>
 			<form method="post" action="/shop/customer/loginCustomer.jsp">
 			수량: <input type="number" name="totalAmount">
-			<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
+			
 			<button>주문하기</button>
 		</form>
 		<% 
 			}else{
 		%>		
-			<form method="post">
+			<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
 			수량: <input type="number" name="totalAmount">
-			<%-- 총 금액: <input type="text" name="totalPrice" readonly value="<%=goodsAmount*(Integer)(gpc.get("goodsPrice"))%>"> --%>
-			<button type="submit" formaction="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">장바구니에 추가</button>
-			<button type="submit" formaction="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">주문하기</button>
-			<!-- form태그 하나에 두개의 button넣기 1) html 5에서만 제공하는 formaction으로 분기 2) value 값으로 action페이지에서 분기  -->
+			
+			<button type="submit">주문하기</button>
+			
 		</form>
 		
 		</div>
@@ -84,26 +92,141 @@
 		%>
 		
 		</div>
-		<div style="width:50%">
-		<div style="width:50%"><b>About Product</b> <br><%=(String)(gpc.get("goodsContent")) %></div>
 		</div>
-		
+		<hr>
+		<h3 class="text-center">REVIEWS</h3>
+		<br>
 		<%
 		}
 		
 		%>
+		
+		<%
+			if(selectCommentPerGoods.size() == 0){
+		
+		%>
+			<div class="text-center">작성된 후기가 존재하지 않습니다.</div>
+		
+		<%
+			}else{
+		%>		
+				
+		<div>
+		<table class="table table-hover">
+			<tr>
+				<td>주문 번호</td>
+				<td>별점</td>
+				<td>한줄 평</td>
+				<td>구매자</td>
+				<td>구매 날짜</td>
+			</tr>
+			<%		
+				for(HashMap<String,Object> m :selectCommentPerGoods){
+			%>
+				<tr>
+					<td><%=(Integer)m.get("ordersNo") %></td>
+					<td>
+					<div class="rate">
+					<%
+						switch((Integer)(m.get("score"))){
+						case 1:
+					%>
+							
+	        				<span style="width: 10%"></span>
+	    					
+	    			<% 
+	    				break;
+						case 2:
+					%>
+					
+	        				<span style="width: 20%"></span>
+	    					
+					<% 
+						break;
+						case 3:
+					%>		
+					
+	        				<span style="width: 30%"></span>
+	    					
+					<% 
+						break;
+						case 4:
+					%>
+					
+	        				<span style="width: 40%"></span>
+	    				
+					<% 	
+						break;
+						case 5:
+					%>		
+					
+	        				<span style="width: 50%"></span>
+	    					
+					<% 
+						break;
+						case 6:
+					%>
+					
+	        				<span style="width: 60%"></span>
+	    				
+					<% 
+						break;
+						case 7:
+					%>
+					
+	        				<span style="width: 70%"></span>
+	    				
+					<% 
+						break;
+						case 8:
+					%>
+					
+	        				<span style="width: 80%"></span>
+	    			
+					<% 
+						break;
+						case 9:
+					%>
+					
+	        				<span style="width: 90%"></span>
+	    					
+					<% 
+						break;
+						case 10:
+					%>
+					
+	        				<span style="width: 100%"></span>
+	    			</div>
+					<% 
+					break;
+						}
+					
+					%>
+					
+					</td>
 
-	
-	
+					<td><%=(String)m.get("content") %></td>
+					<td><%=(String)m.get("mail") %></td>
+					<td><%=(String)m.get("createDate") %></td>
+
+				</tr>
+				
+				
+			<% 	
+				}
+			%>	
+			
+			
+			<%		
+				}
+			%>
+			</table>
+			</div>
 	
 	</div>
 	
-	</div>
-	</div>
-	
-	
-	
-	
+
+
 	<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

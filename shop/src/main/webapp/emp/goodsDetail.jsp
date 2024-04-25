@@ -31,16 +31,14 @@
 </head>
 <body>
 <div class="container-fluid">	
-	<div class="row">
-	<!--  서브메뉴 -->
-	<div class="col-2 text-center">
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 
 	
-	</div>
+	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+
+
 	
-	<div class="col-10">
-		<h1>상품 상세 보기</h1>
+	<div class="text-center">
+		<h3>상품 상세 보기</h3>
 	
 		<%
 		for(HashMap gpc : goodsPerCategory){
@@ -51,7 +49,8 @@
 		<div>등록 아이디 : <%=(String)(gpc.get("empId")) %></div>
 		<div>상품명 : <%=(String)(gpc.get("goodsTitle")) %></div>
 		
-		<div>설명: <%=(String)(gpc.get("goodsContent")) %></div>
+		<div>설명:<br> <%=(String)(gpc.get("goodsContent")) %></div>
+		<hr>
 		<div>가격: <%=(Integer)(gpc.get("goodsPrice")) %></div>
 		<div>수량 :<%=(Integer)(gpc.get("goodsAmount")) %></div>	
 		<div>등록일: <%=(String)(gpc.get("createDate")) %></div>	
@@ -65,13 +64,14 @@
 	
 	<div>
 	<!-- 상품번호 값 넘겨주기 -->
-	<a href="./updateGoodsForm.jsp?goodsNo=<%=goodsNo%>">수정하기</a>
-	<a href="./deleteGoodsForm.jsp?goodsNo=<%=goodsNo%>">삭제하기</a>
+	<hr>
+	<a href="./updateGoodsForm.jsp?goodsNo=<%=goodsNo%>" style="background-color:#BFB4EA; padding:5px;">수정하기</a>
+	<a href="./deleteGoodsForm.jsp?goodsNo=<%=goodsNo%>"style="background-color:#BFB4EA; padding:5px;">삭제하기</a>
 	</div>
 	
 	</div>
 	</div>
-	</div>
+	
 	
 	
 	

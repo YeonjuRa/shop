@@ -54,7 +54,18 @@ margin-right:20px;
 <div style="text-align:center;">
 <hr style="color:black;">
 	<b >PROJECT 2024 구디아카데미 GDJ 80</b>
-	<a class="logout" href="./logoutCustomer.jsp"><img src="../emp/logoutIcon.png" style="width:30px; height:30px; border:0px;">
+	<%
+	if(session.getAttribute("loginCustomer") == null){
+	%>
+    <% 
+	}else{
+	%>	
+	 <a class="logout" href="./logoutCustomer.jsp"><img src="../emp/logoutIcon.png" style="width:30px; height:30px; border:0px;">
     	</a>
+	 
+	<%
+	}
+   %>
+    	
 	</div>
 </footer>

@@ -22,7 +22,7 @@ public class OrderDAO {
 		con.close();
 		return row;
 	}
-	//고객 주문 리스트 출력하기 ==> 페이징 추가하기
+	//고객 주문 리스트 출력하기 
 	public static ArrayList<HashMap<String,Object>> selectOrdersList (String mail)throws Exception{
 		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 		Connection con = DBHelper.getConnection();
@@ -52,7 +52,7 @@ public class OrderDAO {
 		con.close();
 		return list;
 	}
-	//관리자 전체주문을 확인 ->페이징
+	//관리자 전체주문을 확인 
 	public static ArrayList<HashMap<String,Object>> selectOrdersListAll ()throws Exception{
 		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 		Connection con = DBHelper.getConnection();

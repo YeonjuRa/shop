@@ -58,6 +58,7 @@
 <body>
 	
 	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+	<hr>
 	<div>
 	<h4 style="text-align:center">회원정보 자세히 보기</h4>
 	<table style="margin: auto;padding:auto;">
@@ -99,9 +100,9 @@
 	
 	</table> 
 	
-	<div style="margin:10px"><a href="./updateCustomerForm.jsp?id=<%=id%>" >정보 수정하기</a></div>
-	<div style="margin:10px"><a href="./editPwForm.jsp?id=<%=id%>" >비밀번호 변경</a></div>
-	&#127826
+	<div style="margin:10px;"class="d-flex justify-content-center"><a href="./updateCustomerForm.jsp?id=<%=id%>" style="background-color:#BFB4EA; padding:5px;">&#127826 정보 수정하기</a>
+	<a href="./editPwForm.jsp?id=<%=id%>" style="background-color:#BFB4EA; padding:5px;margin-left:5px;" >비밀번호 변경 &#127826</a></div>
+	
 	</div>
 		<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>

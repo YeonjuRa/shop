@@ -41,7 +41,7 @@
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	<h4>사원 정보 보기</h4>
 	
-	<table>
+	<table class="table table-hover">
 	<%
 		for(HashMap c : empOneInfo){
 	%>

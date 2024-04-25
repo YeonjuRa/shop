@@ -67,4 +67,31 @@ public class CommentDAO {
 		con.close();
 		return list;
 	}
+	//선택한 상품 후기 리스트 보기 -> goodsDetailForCustomer.jsp
+	public static ArrayList<HashMap<String,Object>> selectCommentPerGoods (int goodsNo)throws Exception{
+		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+		Connection con = DBHelper.getConnection();
+		String sql = "SELECT o.orders_no ordersNo,o.mail mail, "
+				+ "c.score, c.content, c.create_date createDate FROM orders o INNER JOIN comment c "
+				+ "ON o.orders_no = c.orders_no WHERE o.goods_no = ? ORDER BY o.orders_no DESC;";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,goodsNo);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			
+			m.put("ordersNo",rs.getInt("ordersNo"));
+			m.put("mail", rs.getString("mail"));
+			m.put("score", rs.getInt("score"));
+			m.put("content", rs.getString("content"));
+			m.put("createDate", rs.getString("createDate"));
+			
+			list.add(m);
+		}
+		
+		con.close();
+		return list;
+	}
 }
