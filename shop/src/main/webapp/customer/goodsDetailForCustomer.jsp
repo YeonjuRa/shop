@@ -74,6 +74,7 @@ width: auto;height: 20px;}
 			수량: <input type="number" name="totalAmount">
 			
 			<button>주문하기</button>
+			<button>주문하기</button>
 		</form>
 		<% 
 			}else{
@@ -81,8 +82,8 @@ width: auto;height: 20px;}
 			<form method="post" action="/shop/customer/addOrderForm.jsp?goodsNo=<%=goodsNo%>">
 			수량: <input type="number" name="totalAmount">
 			
+			<button type="submit" formaction="/shop/customer/cart/insertIntoCart.jsp">장바구니에 추가</button>
 			<button type="submit">주문하기</button>
-			
 		</form>
 		
 		</div>
