@@ -11,9 +11,14 @@
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
 	
 
-	String userId = (String)loginMember.get("mail");
-	String goodsNo = request.getParameter("goodsNo");
+	String userId = (String)(loginMember.get("mail"));
+	
+	int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
 	int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
+	
+	System.out.println(userId);
+	System.out.println(goodsNo);
+	System.out.println(totalAmount);
 	
 	int row = CartDAO.insertIntoCart(userId, goodsNo, totalAmount);
 	

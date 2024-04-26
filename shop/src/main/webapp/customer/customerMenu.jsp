@@ -48,6 +48,7 @@
 	<div class="headermenu">
 	<a href="./customerOne.jsp?id=<%=(String)loginMember.get("mail")%>"><%=(String)loginMember.get("name")%></a>
   		님 | 
+  	<a href="/shop/customer/cart/cartList.jsp?id=<%=(String)loginMember.get("mail")%>"> shopping cart | </a>
   	<a href="/shop/customer/ordersListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>">내 주문 |</a>
   	<a href="/shop/customer/commentListForCustomer.jsp?id=<%=(String)loginMember.get("mail")%>"> 내 후기 </a>
   

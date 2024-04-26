@@ -3,6 +3,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class OrderDAO {
+	//addOrderAction.jsp, orderCartGoods.jsp
+	
 	public static int addOrderAction (String mail,int goodsNo,int totalAmount,int totalPrice,String address) throws Exception{
 		Connection con = DBHelper.getConnection();
 		

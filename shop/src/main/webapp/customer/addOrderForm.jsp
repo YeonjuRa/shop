@@ -50,9 +50,12 @@ input {
 <div class="d-flex justify-content-center">
 	<form method="post" action="/shop/orders/addOrdersAction.jsp">
 		회원 아이디: <input type="text" name="mail" value="<%=mail%>" readonly><br>
+	
 		상품 번호: <input type="text" name="goodsNo" value="<%=goodsNo%>" readonly><br>
 		주문 수량 : <input type="text" name="totalAmount" value="<%=totalAmount%>" readonly><br>
 		주문 금액 :<input type="text" name="totalPrice" value="<%=totalPrice%>" readonly><br>
+		
+		
 		주소: <input type="text" name="address"><br>
 		<button type="submit">최종 주문하기</button>
 	</form>
