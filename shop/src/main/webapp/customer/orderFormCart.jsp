@@ -24,10 +24,10 @@
 <title>Insert title here</title>
 </head>
 <body> 
-<form>
+<form method="post" action="/shop/customer/cart/orderCartGoods.jsp">
 <table class="table table-hover">
 		<tr>
-			<th>카트 번호 </th>
+			<th>카트 번호 (hidden 주)</th>
 			<th>상품 번호</th>
 			<th>상품 명</th>
 			<th>이미지 </th>
@@ -63,9 +63,11 @@
 		
 	
 	</table>
+	주소 : <input name="address" placeholder="배송지 주소를 입력해주세요.">
+	
+	<button type="submit">최종 주문하기 </button>
 	</form>
 	
-	<a href="/shop/customer/orderCartGoods.jsp">최종 주문하기 </a>
 
 </body>
 </html>
