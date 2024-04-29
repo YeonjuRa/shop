@@ -24,16 +24,18 @@
 <link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
+<hr>
 	<%
 		if(selectCartList.size() == 0){
 	%>
-	
-		<div>장바구니가 비어 있습니다.</div>
+		
+		<div style="text-align:center">장바구니가 비어 있습니다.</div>
 	
 	<% 
 		}else{
 	%>
-		<table class="table table-hover">
+		<table class="table table-hover text-center">
 		<tr>
 			<th>상품 번호</th>
 			<th>상품 명</th>
@@ -70,7 +72,8 @@
 		
 	
 	</table>
-	
+	<hr>
+	<div style="text-align:center;"><a href="/shop/customer/cart/orderFormCart.jsp">장바구니 상품 주문하기 </a></div>
 	
 	<% 
 		}
@@ -79,6 +82,7 @@
 	
 	
 	
-	<a href="/shop/customer/orderFormCart.jsp">장바구니 상품 주문하기 </a>
+	
+	<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

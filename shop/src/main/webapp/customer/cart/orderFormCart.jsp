@@ -22,12 +22,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="/shop/emp/stylesheet.css" rel="stylesheet">
 </head>
 <body> 
+<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 <form method="post" action="/shop/customer/cart/orderCartGoods.jsp">
 <table class="table table-hover">
 		<tr>
-			<th>카트 번호 (hidden 주)</th>
+			<th>Cart ID</th>
 			<th>상품 번호</th>
 			<th>상품 명</th>
 			<th>이미지 </th>
@@ -42,7 +49,7 @@
 				
 		%>
 		<tr>
-			<td><input name="cartId" value="<%=(Integer)m.get("cartId")%>" readonly></td>
+			<td><input name="cartId" value="<%=(Integer)m.get("cartId")%>" ></td>
 			<td><%=(Integer)m.get("goodsNo")%></td>
 			<td><%=(String)m.get("goodsTitle")%></td>
 			<td><img src="/shop/upload/<%=(String)m.get("filename") %>" width="200" height="200"></td>
@@ -68,6 +75,6 @@
 	<button type="submit">최종 주문하기 </button>
 	</form>
 	
-
+<jsp:include page="/customer/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -57,6 +57,10 @@
 	}
 	
 	if(row != 0){
+			int row1 = CartDAO.deleteFromCart(userId);
+			if(row1 != 0){
+				System.out.println("장바구니 비워짐");
+			}
 			System.out.println("장바구니 상품 주문 성공");
 			response.sendRedirect("/shop/customer/ordersListForCustomer.jsp?id="+mail);
 		}else{
