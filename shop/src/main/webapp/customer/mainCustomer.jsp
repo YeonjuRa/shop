@@ -126,8 +126,8 @@ https://velog.io/@wswy17/CSS-animation-%ED%99%9C%EC%9A%A9%ED%95%B4-slider-%EB%A7
 			<img src="/shop/img_source/photo_6.JPG" width="600" height="900">
 		</div>
 		</div>
-		</div>
-		</div>
+	</div>
+</div>
 		
 		
 	
