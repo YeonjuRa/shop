@@ -89,19 +89,20 @@ public class CartDAO {
 			con.close();
 			return list;
 		}
-		//호출 deleteFromCart.jsp
-		//param: String user_id
+		//호출 orderCartGoods.jsp
+		//param: int user_id
 		//return int row
-		public static int deleteFromCart (String userId) throws Exception{
-			int row = 0;
-			Connection con = DBHelper.getConnection();
-			String sql = "delete from cart where user_id = ?";
-			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, userId);
-			row = stmt.executeUpdate();
-			
-			con.close();
-			return row;
-		}
+			public static int deleteFromCart (int cartId) throws Exception{
+				int row = 0;
+				Connection con = DBHelper.getConnection();
+				String sql = "delete from cart where cart_id = ?";
+				PreparedStatement stmt = con.prepareStatement(sql);
+				stmt.setInt(1, cartId);
+				row = stmt.executeUpdate();
+					
+				con.close();
+				return row;
+			}
+		
 
 }

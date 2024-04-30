@@ -34,7 +34,7 @@
 <form method="post" action="/shop/customer/cart/orderCartGoods.jsp">
 <table class="table table-hover">
 		<tr>
-			<th>Cart ID</th>
+			<th>선택</th>
 			<th>상품 번호</th>
 			<th>상품 명</th>
 			<th>이미지 </th>
@@ -49,7 +49,7 @@
 				
 		%>
 		<tr>
-			<td><input name="cartId" value="<%=(Integer)m.get("cartId")%>" ></td>
+			<td><input type="checkbox" name="cartId" value="<%=(Integer)m.get("cartId")%>" checked ></td>
 			<td><%=(Integer)m.get("goodsNo")%></td>
 			<td><%=(String)m.get("goodsTitle")%></td>
 			<td><img src="/shop/upload/<%=(String)m.get("filename") %>" width="200" height="200"></td>
