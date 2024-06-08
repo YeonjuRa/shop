@@ -5,7 +5,7 @@
 <%
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginCustomer"));
 	
-	ArrayList<HashMap<String, Object>> NewProductsList = GoodsDAO.NewProductsList();
+	
 
 %>
 <!DOCTYPE html>

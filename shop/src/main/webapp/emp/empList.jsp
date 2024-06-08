@@ -17,37 +17,18 @@
 
 <%
 
-	//디비 연결
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	
-	//페이징 -> 페이징은 jsp에서 구현
+	//페이징
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
-	int rowPerPage = 8;
+	int rowPerPage = 10;
 	int startRow = (currentPage-1) * rowPerPage;
 	
 	//lastPage 구하기
-	String pageSql = "select count(*) from emp";
-	
-	PreparedStatement pageStmt = null;
-	ResultSet pageRs = null;
-	pageStmt = con.prepareStatement(pageSql);
-	pageRs = pageStmt.executeQuery();
-	
-	int totalRow = 0;
-	if(pageRs.next()){
-		totalRow = pageRs.getInt("count(*)");
-	}
-	int lastPage = totalRow/rowPerPage;
-	if(totalRow%rowPerPage != 0){
-		lastPage = lastPage +1;
-	}
+	int lastPage = EmpDAO.getLastPageEmp();
 
 %>
 
@@ -61,7 +42,7 @@
 %>
 <!-- model Layer -->
 <% 	
-//empList출력	
+
 
 	 ArrayList<HashMap<String,Object>> list = EmpDAO.empList(startRow, rowPerPage);
 
@@ -152,31 +133,21 @@
 				
 				
 				<%
-					if(currentPage > 1){
+					if(currentPage != 1){
 			
 				%>
 					<li ><a href="./empList.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
 					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
 				<%
-					}else{
-				%>	
-					<li ><a href="./empList.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
-					
-				<%	
+			
 					}
 					if(currentPage<lastPage){
 				%>
 					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>">&nbsp;| 다음 > &nbsp;</a></li>
 					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
 				<%
-					}else{
-						
-				%>
-					<li><a href="./empList.jsp?currentPage=<%=currentPage+1%>"> 다음 >&nbsp;</a></li>
-					<li><a href="./empList.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
 				
-				<% 
+				
 					}
 				
 				%>

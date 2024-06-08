@@ -12,8 +12,8 @@
 	}
 	
 	
-	//리스트에 넣기
-	ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
+	// 상품 하나 ->HashMap
+	HashMap<String,Object> gpc = GoodsDAO.updateGoodsForm(goodsNo);
 		
 
 %>
@@ -40,10 +40,7 @@
 	<div class="text-center">
 		<h3>상품 상세 보기</h3>
 	
-		<%
-		for(HashMap gpc : goodsPerCategory){
-			
-		%>	
+		
 		<div><img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="200" height="200"></div>
 		<div>카테고리 : <%=(String)(gpc.get("category"))%></div>
 		<div>등록 아이디 : <%=(String)(gpc.get("empId")) %></div>
@@ -54,13 +51,7 @@
 		<div>가격: <%=(Integer)(gpc.get("goodsPrice")) %></div>
 		<div>수량 :<%=(Integer)(gpc.get("goodsAmount")) %></div>	
 		<div>등록일: <%=(String)(gpc.get("createDate")) %></div>	
-		<%
 		
-		
-		}
-		
-		%>
-
 	
 	<div>
 	<!-- 상품번호 값 넘겨주기 -->

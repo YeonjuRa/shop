@@ -91,6 +91,7 @@
 	&#127826
 	</form>
 	</div>
+	<div><a href="./addEmpForm.jsp">사원가입</a></div>
 	</div>
 	</div>
 

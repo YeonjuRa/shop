@@ -6,8 +6,23 @@
 
 	HashMap<String,Object>  loginMember = (HashMap<String,Object>) (session.getAttribute("loginEmp"));
 	
-	ArrayList<HashMap<String,Object>> selectOrderList = OrderDAO.selectOrdersListAll();
+	
 
+%>
+<%
+
+	
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null){
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	int rowPerPage = 10;
+	int startRow = (currentPage-1) * rowPerPage;
+	int lastPage = OrderDAO.cntOrders();
+	
+	
+	ArrayList<HashMap<String,Object>> selectOrderList = OrderDAO.selectOrdersListAll(startRow, rowPerPage);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -71,5 +86,34 @@
 		
 		
 	</table>
+			<!-- 페이징 -->
+		<div class="text-center mt-2"><%=currentPage%></div>
+	
+		<div style="height:40px;display: table;margin-left: auto; margin-right: auto;">
+				
+				<ul class="text-center">
+				
+				
+				<%
+					if(currentPage != 1){
+			
+				%>
+					<li ><a href="./OrdersListForEmp.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
+					<li><a href="./OrdersListForEmp.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
+				<%
+			
+					}
+					if(currentPage<lastPage){
+				%>
+					<li><a href="./OrdersListForEmp.jsp?currentPage=<%=currentPage+1%>">&nbsp;| 다음 > &nbsp;</a></li>
+					<li><a href="./OrdersListForEmp.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
+				<%
+				
+				
+					}
+				
+				%>
+				</ul>
+			</div>
 </body>
 </html>

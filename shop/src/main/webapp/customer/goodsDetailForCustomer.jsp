@@ -8,7 +8,7 @@
 
 	
 	//리스트에 넣기
-	ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
+	HashMap<String,Object> gpc = GoodsDAO.updateGoodsForm(goodsNo);
 	/* 
 	int goodsAmount = 0;
 	if(request.getParameter("goodsAmount") == null || request.getParameter("goodsAmount").equals("null")){
@@ -49,10 +49,7 @@ width: auto;height: 20px;}
 <div class="container-fluid">	
 		<div class="d-flex justify-content-center">
 		
-		<%
-		for(HashMap gpc : goodsPerCategory){
-			
-		%>	
+	
 		<div style="width:80%;">
 		 <b>> Category : <%=(String)(gpc.get("category"))%></b><br><br>
 		<img src="/shop/upload/<%=(String)(gpc.get("fileName"))%>" width="35%" height="500">
@@ -97,10 +94,7 @@ width: auto;height: 20px;}
 		<hr>
 		<h3 class="text-center">REVIEWS</h3>
 		<br>
-		<%
-		}
 		
-		%>
 		
 		<%
 			if(selectCommentPerGoods.size() == 0){

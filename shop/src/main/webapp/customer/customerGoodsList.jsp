@@ -8,11 +8,7 @@
 <%
 	
 	
-	//요청분석
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
+	
 	//페이징
 	
 		int currentPage = 1;
@@ -22,38 +18,13 @@
 		
 		int rowPerPage = 15;
 		int startRow = (currentPage-1) * rowPerPage;
-		
-		//lastPage 구하기
-		
-		String pageSql = null;
 		String category = request.getParameter("category");
-		//category가 null일경우 제거
-		PreparedStatement pageStmt = null;
-		ResultSet pageRs = null;
 		if(category == null){
 			category = "";
 		}
-		//전체 상품갯수 // 카테고리별 상품갯수 분기하기
-		if(category == ""){
-			pageSql = "select count(*) from goods";
-			pageStmt = con.prepareStatement(pageSql);
-		}else{
-			pageSql = "select count(*) from goods where category =?";
-			pageStmt = con.prepareStatement(pageSql);
-			pageStmt.setString(1,category);
-		}
+		//lastPage 구하기
 		
-		
-		pageRs = pageStmt.executeQuery();
-		
-		int totalRow = 0;
-		if(pageRs.next()){
-			totalRow = pageRs.getInt("count(*)");
-		}
-		int lastPage = totalRow/rowPerPage;
-		if(totalRow%rowPerPage != 0){
-			lastPage = lastPage +1;
-		}
+		int lastPage = GoodsDAO.page(category);
 	
 	/*
 	category가 null이면
@@ -156,13 +127,12 @@
 					<li><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
 					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">&nbsp; < 이전 </a></li>
 				<%
-					}else{
+					}
 				%>	
-					<li><a href="./customerGoodsList.jsp?currentPage=1&category=<%=category%>"> << 처음 페이지&nbsp; </a></li>
-					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>"> &nbsp;< 이전 </a></li>
+					
 					
 				<%	
-					}
+					
 					if(currentPage<lastPage){
 				%>
 					<li><a href="./customerGoodsList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">&nbsp; 다음 > </a></li>

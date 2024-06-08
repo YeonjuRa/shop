@@ -20,7 +20,7 @@
 	String empId = request.getParameter("empId");
 	
 	//리스트에 넣기
-		ArrayList<HashMap<String,Object>> empUpdateInfo = EmpDAO.updateEmpForm(empId);
+		HashMap<String,Object> c = EmpDAO.updateEmpForm(empId);
 
 	
 
@@ -39,9 +39,7 @@
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	<form method="post" action="/shop/emp/updateEmpAction.jsp">
 	<table>
-	<%
-		for(HashMap c : empUpdateInfo){
-	%>
+	
 		<tr>
 			<td>ID : </td>
 			<td><input type="text" name="empId" value="<%=(String) c.get("empId")%>" readonly></td>
@@ -75,10 +73,6 @@
 		</tr>
 	
 	
-	<% 
-		}
-	
-	%>
 	
 	</table> 
 	<div style="margin:10px"><button type="submit" class="btnn" >정보 수정하기</button></div>

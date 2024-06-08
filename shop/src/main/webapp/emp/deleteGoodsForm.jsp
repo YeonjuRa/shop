@@ -32,7 +32,7 @@
 	//삭제할 상품 정보 확인을 위해 값 넣어주기 -> 상품번호,상품카테고리, 상품명, 이미지,가격
 	
 	//리스트에 넣기
-	ArrayList<HashMap<String,Object>> deleteGoodsForm = GoodsDAO.updateGoodsForm(goodsNo);
+	HashMap<String,Object> m = GoodsDAO.updateGoodsForm(goodsNo);
 	
 		
 
@@ -67,9 +67,7 @@
 			<td><input type="text" name="goodsNo" value="<%=goodsNo%>" readonly></td>
 		</tr>
 		<tr>
-		<%
-			for(HashMap m : deleteGoodsForm){
-		%>
+		
 		
 			<td>카테고리 </td>
 			<td><input type="text" name="category" value="<%=(String)(m.get("category"))%>" readonly></td>
@@ -87,10 +85,7 @@
 			<td><input type="text" name="goodsPrice" value="<%=(Integer)(m.get("goodsPrice"))%>" readonly></td>
 		</tr>
 		
-		<% 
-			}
 		
-		%>
 		
 		<tr>
 			<td>아이디</td>

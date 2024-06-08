@@ -12,7 +12,8 @@ public class GoodsDAO {
 		int rowPerPage = 15;
 		Connection con = DBHelper.getConnection();
 		String pageSql = null;
-		//category가 null일경우 제거
+		
+		
 		PreparedStatement pageStmt = null;
 		ResultSet pageRs = null;
 		
@@ -97,7 +98,7 @@ public class GoodsDAO {
 		con.close();
 		return goodsList;
 	}
-	//update 쿼리날리기
+	//updateGoodsList
 	public static int updateGoodsList (int goodsNo,String empId,String category,int goodsPrice,int goodsAmount,String goodsTitle,String goodsContent,String filename) throws Exception{
 		Connection con = DBHelper.getConnection();
 		
@@ -118,8 +119,9 @@ public class GoodsDAO {
 		con.close();
 		return row;
 	}
-	public static ArrayList<HashMap<String,Object>> updateGoodsForm (int goodsNo) throws Exception {
-		ArrayList<HashMap<String,Object>> updateGoodsForm = new ArrayList<HashMap<String,Object>>();
+	//updateGoodsForm, goodsDetail
+	public static HashMap<String,Object> updateGoodsForm (int goodsNo) throws Exception {
+		HashMap<String,Object> m = new HashMap<>();
 		Connection con = DBHelper.getConnection();
 		
 		PreparedStatement stmt= null;
@@ -130,8 +132,7 @@ public class GoodsDAO {
 		stmt.setInt(1,goodsNo);
 		rs = stmt.executeQuery();
 		
-		while(rs.next()){
-				HashMap<String,Object> m = new HashMap<String,Object>();
+		if(rs.next()){
 			
 				m.put("goodsNo",rs.getInt("goods_no"));
 				m.put("category", rs.getString("category"));
@@ -145,11 +146,11 @@ public class GoodsDAO {
 				m.put("createDate", rs.getString("create_date"));
 				
 				
-				updateGoodsForm.add(m);
+				
 		
 		}
 		con.close();
-		return updateGoodsForm;
+		return m;
 	}
 	public static int deleteGoodsAction(int goodsNo) throws Exception {
 		int row = 0;
@@ -208,26 +209,6 @@ public class GoodsDAO {
 			con.close();
 			return row;
 	 }
-	 //메인 페이지에만 출력될 상품 리스트 
-	 public static ArrayList<HashMap<String, Object>> NewProductsList () throws Exception{
-	 ArrayList<HashMap<String, Object>> NewProductsList =
-				new ArrayList<HashMap<String, Object>>();
-		//디비연결
-		Connection con = DBHelper.getConnection();
-		String sql = "select goods_title,filename from goods order by create_date desc limit 0,5";
-		
-		PreparedStatement stmt = con.prepareStatement(sql);
-		ResultSet rs = stmt.executeQuery();
-	
-		
-		while(rs.next()) {
-			HashMap<String, Object> m = new HashMap<String, Object>();
-			m.put("goodsTitle", rs.getString("goods_title"));
-			m.put("fileName", rs.getString("filename"));
-			NewProductsList.add(m);
-		}
-		con.close();
-		return NewProductsList;
-	}
+	 
 }
 

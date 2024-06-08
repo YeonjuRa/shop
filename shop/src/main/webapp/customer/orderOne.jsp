@@ -12,7 +12,7 @@
 
 	int ordersNo = Integer.parseInt(request.getParameter("ordersNo"));
 		
-	ArrayList<HashMap<String,Object>> orderOne = OrderDAO.selectOrderOne(ordersNo);
+	HashMap<String,Object> m = OrderDAO.selectOrderOne(ordersNo);
 	
 	
 
@@ -76,9 +76,7 @@
 <body>
 <jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<table class="table table-hover">
-	<%
-		for(HashMap<String,Object> m : orderOne){
-	%>
+	
 		<tr>
 			<td>주문번호 </td>
 			<td><%=m.get("ordersNo") %></td>
@@ -136,7 +134,7 @@
 		    </div>
 	<%
 		}
-	}
+
 	
 	
 	%>

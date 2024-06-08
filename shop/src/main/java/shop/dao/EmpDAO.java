@@ -48,22 +48,23 @@ public class EmpDAO {
 			resultMap.put("empName",rs.getString("empName"));
 			resultMap.put("grade",rs.getInt("grade"));
 		}
-		con.close(); //--> 이거 안하면 디비 서버가 다운될 수도 있음
-		return resultMap; //-->읽어올 값이 없으면 null
+		con.close(); 
+		//--> 이거 안하면 디비 서버가 다운될 수도 있음
+		return resultMap; 
+		//-->읽어올 값이 없으면 null
 	}
 	//호출 -> updateEmpForm.jsp  , empOne.jsp
 	//param -> string empId ->아이디로 분기
-	//return ArrayList<HashMap<String,Object>>
-	public static ArrayList<HashMap<String,Object>> updateEmpForm(String empId) throws Exception{
-		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>> ();
+	//return <HashMap<String,Object>> --> 읽어올 행 하나 -> HashMap
+	public static HashMap<String,Object> updateEmpForm(String empId) throws Exception{
+		HashMap<String,Object> m = new HashMap<> ();
 		Connection con = DBHelper.getConnection();
 		String sql = "select * from emp where emp_id = ?";
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1, empId);
 		ResultSet rs = stmt.executeQuery();
 		
-		while(rs.next()){
-			HashMap<String,Object> m = new HashMap<String,Object>();
+		if(rs.next()){
 			
 			
 			m.put("grade", rs.getInt("grade"));
@@ -76,12 +77,10 @@ public class EmpDAO {
 			
 			
 			
-			list.add(m);
-			
 		}
 		
 		con.close();
-		return list;
+		return m;
 	}
 	//호출 -> updateEmpAction.jsp
 	//param : empId, empName,dmt,hireDate
@@ -160,5 +159,30 @@ public class EmpDAO {
 		}
 		con.close();
 		return row;
+	}
+	public static int getLastPageEmp() throws Exception{
+		int lastPage = 0;
+		int rowPerPage = 10;
+		Connection con = DBHelper.getConnection();
+		
+		PreparedStatement pageStmt = null;
+		ResultSet pageRs = null;
+		
+		String pageSql = "select count(*) from orders";
+		pageStmt = con.prepareStatement(pageSql);
+	
+		pageRs = pageStmt.executeQuery();
+		
+		int totalRow = 0;
+		if(pageRs.next()){
+			totalRow = pageRs.getInt("count(*)");
+		}
+		lastPage = totalRow/rowPerPage;
+		if(totalRow%rowPerPage != 0){
+			lastPage = lastPage +1;
+		}
+		con.close();
+		return lastPage;
+		
 	}
 }

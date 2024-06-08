@@ -26,7 +26,7 @@
 	
 	if(row  != 0){
 		System.out.println("사원등록 성공");
-		response.sendRedirect("./empList.jsp");
+		response.sendRedirect("./empLoginForm.jsp");
 		//가입 성공시 grade = 0, active = OFF로 생성 -> 관리자가 active On해줘야 접속 가능
 	}else{
 		System.out.println("등록 실패 - 오류 발생");

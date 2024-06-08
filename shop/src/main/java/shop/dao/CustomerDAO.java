@@ -164,6 +164,33 @@ public class CustomerDAO {
 			
 			return list;
 		}
-	
+	//updateCustomerForm, customerOne
+		public static HashMap<String,Object> cusInfo (String id) throws Exception{
+			Connection con = DBHelper.getConnection();
+			HashMap<String,Object> cusInfo = new HashMap<>();
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select * from customer where mail = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1,id);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()){
+				
+				
+				cusInfo.put("id", rs.getString("mail"));
+				cusInfo.put("name", rs.getString("name"));
+				cusInfo.put("birth", rs.getString("birth"));
+				cusInfo.put("gender", rs.getString("gender"));
+				cusInfo.put("updateDate", rs.getString("update_date"));
+				cusInfo.put("createDate", rs.getString("create_date"));
+				
+				
+				
+			}
+			con.close();
+			return cusInfo;
+		}
 		
 }

@@ -55,15 +55,17 @@ public class OrderDAO {
 		return list;
 	}
 	//관리자 전체주문을 확인 
-	public static ArrayList<HashMap<String,Object>> selectOrdersListAll ()throws Exception{
+	public static ArrayList<HashMap<String,Object>> selectOrdersListAll (int startRow, int rowPerPage)throws Exception{
 		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 		Connection con = DBHelper.getConnection();
 		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle,"
 				+ " o.total_amount totalAmount, o.total_price totalPrice,o.state state, o.create_date createDate "
 				+ "from orders o inner join goods g on o.goods_no = g.goods_no "
-				+ " order by o.orders_no DESC";
+				+ " order by o.orders_no desc limit ?,? ";
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, startRow);
+		stmt.setInt(2, rowPerPage);
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
@@ -98,8 +100,8 @@ public class OrderDAO {
 		con.close();
 		return row;
 	}
-	public static ArrayList<HashMap<String,Object>> selectOrderOne (int ordersNo)throws Exception{
-		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+	public static HashMap<String,Object> selectOrderOne (int ordersNo)throws Exception{
+		HashMap<String,Object> m = new HashMap<>();
 		Connection con = DBHelper.getConnection();
 		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, g.filename filename, "
 				+ " o.total_amount totalAmount, o.total_price totalPrice,o.state state, o.create_date createDate "
@@ -110,8 +112,7 @@ public class OrderDAO {
 		stmt.setInt(1,ordersNo);
 		ResultSet rs = stmt.executeQuery();
 		
-		while(rs.next()) {
-			HashMap<String, Object> m = new HashMap<String, Object>();
+		if(rs.next()) {
 			
 			m.put("ordersNo",rs.getInt("ordersNo"));
 			m.put("goodsNo", rs.getInt("goodsNo"));
@@ -122,14 +123,13 @@ public class OrderDAO {
 			m.put("state", rs.getString("state"));
 			m.put("createDate", rs.getString("createDate"));
 			
-			list.add(m);
 		}
 		
 		con.close();
-		return list;
+		return m;
 	}
 		
-		public static int cancelOrderActoin (int ordersNo) throws Exception {
+	public static int cancelOrderActoin (int ordersNo) throws Exception {
 			Connection con = DBHelper.getConnection();
 			
 			String sql = "update orders set state='취소 완료' where orders_no =? and state ='결제 완료'";
@@ -144,7 +144,30 @@ public class OrderDAO {
 			con.close();
 			return row;
 		}
+	public static int cntOrders() throws Exception{
+		int lastPage = 0;
+		int rowPerPage = 10;
+		Connection con = DBHelper.getConnection();
+		
+		PreparedStatement pageStmt = null;
+		ResultSet pageRs = null;
+		
+		String pageSql = "select count(*) from orders";
+		pageStmt = con.prepareStatement(pageSql);
 	
+		pageRs = pageStmt.executeQuery();
+		
+		int totalRow = 0;
+		if(pageRs.next()){
+			totalRow = pageRs.getInt("count(*)");
+		}
+		lastPage = totalRow/rowPerPage;
+		if(totalRow%rowPerPage != 0){
+			lastPage = lastPage +1;
+		}
+		con.close();
+		return lastPage;
+	}
 
 	
 }

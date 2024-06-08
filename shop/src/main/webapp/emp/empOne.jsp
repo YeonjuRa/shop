@@ -21,8 +21,8 @@
 	String empId = request.getParameter("empId");
 	
 	
-	//리스트에 넣기
-		ArrayList<HashMap<String,Object>> empOneInfo = EmpDAO.updateEmpForm(empId);
+	
+		HashMap<String,Object> c = EmpDAO.updateEmpForm(empId);
 	
 	
 
@@ -42,9 +42,7 @@
 	<h4>사원 정보 보기</h4>
 	
 	<table class="table table-hover">
-	<%
-		for(HashMap c : empOneInfo){
-	%>
+	
 		<tr>
 			<td>ID : </td>
 			<td><%=(String) c.get("empId")%></td>
@@ -76,10 +74,6 @@
 		</tr>
 	
 	
-	<% 
-		}
-	
-	%>
 	</table> 
 	
 	<div><a href="./updateEmpForm.jsp?empId=<%=(String)loginMember.get("empId")%>">사원 정보 수정하기</a></div>

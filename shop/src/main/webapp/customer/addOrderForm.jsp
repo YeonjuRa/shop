@@ -15,11 +15,11 @@
     String mail = (String)loginMember.get("mail");
     int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
     
-    ArrayList<HashMap<String,Object>> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
+   HashMap<String,Object> goodsPerCategory = GoodsDAO.updateGoodsForm(goodsNo);
     int pricePerGoods = 0;
-    for(HashMap gpc : goodsPerCategory){
-    	pricePerGoods = (Integer)(gpc.get("goodsPrice"));
-    }
+   
+    pricePerGoods = (Integer)(goodsPerCategory.get("goodsPrice"));
+   
 	int totalPrice = pricePerGoods*totalAmount;
 %>
 

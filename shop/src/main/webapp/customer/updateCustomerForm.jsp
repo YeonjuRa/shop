@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import ="shop.dao.*" %>
 
 <%
 	if(session.getAttribute("loginCustomer") == null){
@@ -9,39 +9,8 @@
 	}
 	
 	String id = request.getParameter("id");
-	//id 기준
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection con = null;
-	con = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
 	
-	String sql = "select * from customer where mail = ?";
-	stmt = con.prepareStatement(sql);
-	stmt.setString(1,id);
-	rs = stmt.executeQuery();
-	
-	//리스트에 넣기
-		ArrayList<HashMap<String,Object>> cusUpdateInfo = new ArrayList<HashMap<String,Object>>();
-	while(rs.next()){
-		HashMap<String,Object> cusInfo = new HashMap<String,Object>();
-		
-		
-		
-		cusInfo.put("id", rs.getString("mail"));
-		cusInfo.put("name", rs.getString("name"));
-		cusInfo.put("birth", rs.getString("birth"));
-		cusInfo.put("gender", rs.getString("gender"));
-		cusInfo.put("updateDate", rs.getString("update_date"));
-		cusInfo.put("createDate", rs.getString("create_date"));
-		
-		
-		
-		cusUpdateInfo.add(cusInfo);
-		
-	}
-	
+	HashMap<String,Object> c = CustomerDAO.cusInfo(id);
 
 %>
 <!DOCTYPE html>
@@ -58,9 +27,7 @@
 	<jsp:include page="/customer/customerMenu.jsp"></jsp:include>
 	<form method="post" action="/shop/customer/updateCustomerAction.jsp">
 	<table class="table table-hover">
-	<%
-		for(HashMap c : cusUpdateInfo){
-	%>
+	
 		<tr>
 			<td>ID (Mail) : </td>
 			<td><input type="text" name="id" value="<%=(String) c.get("id")%>" readonly></td>
@@ -90,10 +57,6 @@
 	
 	
 	
-	<% 
-		}
-	
-	%>
 	
 	</table> 
 	<div style="margin:10px"><button type="submit" class="btnn" >정보 수정하기</button></div>

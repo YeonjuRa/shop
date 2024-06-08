@@ -115,31 +115,20 @@
 				
 				
 				<%
-					if(currentPage > 1){
+					if(currentPage != 1){
 			
 				%>
 					<li ><a href="./customerListForEmp.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
 					<li><a href="./customerListForEmp.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
 				<%
-					}else{
-				%>	
-					<li ><a href="./customerListForEmp.jsp?currentPage=1">&nbsp; << 처음 페이지 </a></li>
-					<li><a href="./customerListForEmp.jsp?currentPage=<%=currentPage-1%>">&nbsp; < 이전 </a></li>
-					
-				<%	
+		
 					}
 					if(currentPage<lastPage){
 				%>
 					<li><a href="./customerListForEmp.jsp?currentPage=<%=currentPage+1%>">&nbsp;| 다음 > &nbsp;</a></li>
 					<li><a href="./customerListForEmp.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
 				<%
-					}else{
-						
-				%>
-					<li><a href="./customerListForEmp.jsp?currentPage=<%=currentPage+1%>"> 다음 >&nbsp;</a></li>
-					<li><a href="./customerListForEmp.jsp?currentPage=<%=lastPage%>"> 마지막 페이지 >>&nbsp;</a></li>
-				
-				<% 
+					
 					}
 				
 				%>
